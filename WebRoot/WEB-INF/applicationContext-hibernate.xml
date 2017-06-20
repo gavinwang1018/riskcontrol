@@ -1,0 +1,1841 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+    "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName"><value>java:comp/env/riskControl</value></property>
+    </bean>
+                                  
+    <bean id="DataSourceTransactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<property name="dataSource" ref="dataSource" />
+    </bean>    
+
+    <!-- Transaction template for Managers, from:
+         http://blog.exis.com/colin/archives/2004/07/31/concise-transaction-definitions-spring-11/ -->
+    <bean id="txProxyTemplate" abstract="true"
+        class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <!-- Transaction manager for a single Hibernate SessionFactory (alternative to JTA) -->
+    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory">
+        </property>
+    </bean>
+
+    <!-- Hibernate SessionFactory -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="mappingResources">
+            <list>
+
+<!-- start:  Generated for sys_action_edit_form From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysActionEditForm.hbm.xml</value>
+<!-- end:  Generated for sys_action_edit_form From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_action_list_form From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysActionListForm.hbm.xml</value>
+<!-- end:  Generated for sys_action_list_form From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_action_list_rec From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysActionListRec.hbm.xml</value>
+<!-- end:  Generated for sys_action_list_rec From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_action_view_form From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysActionViewForm.hbm.xml</value>
+<!-- end:  Generated for sys_action_view_form From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_app From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysApp.hbm.xml</value>
+<!-- end:  Generated for sys_app From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_autonumber From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysAutonumber.hbm.xml</value>
+<!-- end:  Generated for sys_autonumber From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_data_object From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysDataObject.hbm.xml</value>
+<!-- end:  Generated for sys_data_object From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_field From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysField.hbm.xml</value>
+<!-- end:  Generated for sys_field From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_form_layout From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysFormLayout.hbm.xml</value>
+<!-- end:  Generated for sys_form_layout From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_item From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysItem.hbm.xml</value>
+<!-- end:  Generated for sys_item From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_list_field From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysListField.hbm.xml</value>
+<!-- end:  Generated for sys_list_field From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_list_layout From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysListLayout.hbm.xml</value>
+<!-- end:  Generated for sys_list_layout From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_menu From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysMenu.hbm.xml</value>
+<!-- end:  Generated for sys_menu From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_org From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysOrg.hbm.xml</value>
+<!-- end:  Generated for sys_org From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_portal_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysPortalDef.hbm.xml</value>
+<!-- end:  Generated for sys_portal_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_portlet_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysPortletDef.hbm.xml</value>
+<!-- end:  Generated for sys_portlet_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_relative From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysRelative.hbm.xml</value>
+<!-- end:  Generated for sys_relative From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_relative_action From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysRelativeAction.hbm.xml</value>
+<!-- end:  Generated for sys_relative_action From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_report_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysReportDef.hbm.xml</value>
+<!-- end:  Generated for sys_report_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_report_field_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysReportFieldDef.hbm.xml</value>
+<!-- end:  Generated for sys_report_field_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_report_group_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysReportGroupDef.hbm.xml</value>
+<!-- end:  Generated for sys_report_group_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_report_query_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysReportQueryDef.hbm.xml</value>
+<!-- end:  Generated for sys_report_query_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_role From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysRole.hbm.xml</value>
+<!-- end:  Generated for sys_role From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_role_authority From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysRoleAuthority.hbm.xml</value>
+<!-- end:  Generated for sys_role_authority From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_section From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysSection.hbm.xml</value>
+<!-- end:  Generated for sys_section From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_user_authority From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysUserAuthority.hbm.xml</value>
+<!-- end:  Generated for sys_user_authority From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_user_role From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysUserRole.hbm.xml</value>
+<!-- end:  Generated for sys_user_role From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_user From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysUser.hbm.xml</value>
+<!-- end:  Generated for sys_user From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_daily_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysDailyDef.hbm.xml</value>
+<!-- end:  Generated for sys_daily_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_daily_event From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysDailyEvent.hbm.xml</value>
+<!-- end:  Generated for sys_daily_event From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_daily_ins From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysDailyIns.hbm.xml</value>
+<!-- end:  Generated for sys_daily_ins From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_biz_service_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysBizServiceDef.hbm.xml</value>
+<!-- end:  Generated for sys_biz_service_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_party From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysParty.hbm.xml</value>
+<!-- end:  Generated for sys_party From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_template From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysTemplate.hbm.xml</value>
+<!-- end:  Generated for sys_template From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_template_import From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysTemplateImport.hbm.xml</value>
+<!-- end:  Generated for sys_template_import From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_template_log From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysTemplateLog.hbm.xml</value>
+<!-- end:  Generated for sys_template_log From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_eca_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysEcaDef.hbm.xml</value>
+<!-- end:  Generated for sys_eca_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_eca_action From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysEcaAction.hbm.xml</value>
+<!-- end:  Generated for sys_eca_action From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_workflow_def From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysWorkflowDef.hbm.xml</value>
+<!-- end:  Generated for sys_workflow_def From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_workflow_state From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysWorkflowState.hbm.xml</value>
+<!-- end:  Generated for sys_workflow_state From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_message From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysMessage.hbm.xml</value>
+<!-- end:  Generated for sys_message From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_workflow_ins_proc From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysWorkflowInsProc.hbm.xml</value>
+<!-- end:  Generated for sys_workflow_ins_proc From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_workflow_ins_task From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysWorkflowInsTask.hbm.xml</value>
+<!-- end:  Generated for sys_workflow_ins_task From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_transmit From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysTransmit.hbm.xml</value>
+<!-- end:  Generated for sys_transmit From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_transmit_detail From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysTransmitDetail.hbm.xml</value>
+<!-- end:  Generated for sys_transmit_detail From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for sys_loginfo From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/SysLoginfo.hbm.xml</value>
+<!-- end:  Generated for sys_loginfo From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for epc_ins_task From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/EpcInsTask.hbm.xml</value>
+<!-- end:  Generated for epc_ins_task From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for epc_ins_proc From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/EpcInsProc.hbm.xml</value>
+<!-- end:  Generated for epc_ins_proc From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_user_info From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TuserInfo.hbm.xml</value>
+<!-- end:  Generated for t_user_info From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_organize_info From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TorganizeInfo.hbm.xml</value>
+<!-- end:  Generated for t_organize_info From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_role_info From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TroleInfo.hbm.xml</value>
+<!-- end:  Generated for t_role_info From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_organize_user From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TorganizeUser.hbm.xml</value>
+<!-- end:  Generated for t_organize_user From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule_instance From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TruleInstance.hbm.xml</value>
+<!-- end:  Generated for t_rule_instance From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_mchnt From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Tmchnt.hbm.xml</value>
+<!-- end:  Generated for t_mchnt From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_mcc From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Tmcc.hbm.xml</value>
+<!-- end:  Generated for t_mcc From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_cardbin From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Tcardbin.hbm.xml</value>
+<!-- end:  Generated for t_cardbin From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskcase_rulegroup From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TriskcaseRulegroup.hbm.xml</value>
+<!-- end:  Generated for t_riskcase_rulegroup From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskcase_attachment From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TriskcaseAttachment.hbm.xml</value>
+<!-- end:  Generated for t_riskcase_attachment From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskcase_log From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TriskcaseLog.hbm.xml</value>
+<!-- end:  Generated for t_riskcase_log From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskcase From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Triskcase.hbm.xml</value>
+<!-- end:  Generated for t_riskcase From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_role_user From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TroleUser.hbm.xml</value>
+<!-- end:  Generated for t_role_user From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule_instance_mcc From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TruleInstanceMcc.hbm.xml</value>
+<!-- end:  Generated for t_rule_instance_mcc From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Trule.hbm.xml</value>
+<!-- end:  Generated for t_rule From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_basearg From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Tbasearg.hbm.xml</value>
+<!-- end:  Generated for t_basearg From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_permission From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/Tpermission.hbm.xml</value>
+<!-- end:  Generated for t_permission From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_keo_mchnt From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TkeoMchnt.hbm.xml</value>
+<!-- end:  Generated for t_keo_mchnt From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule_group From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TruleGroup.hbm.xml</value>
+<!-- end:  Generated for t_rule_group From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule_instance_group From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TruleInstanceGroup.hbm.xml</value>
+<!-- end:  Generated for t_rule_instance_group From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_rule_instance_group_segment From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TruleInstanceGroupSegment.hbm.xml</value>
+<!-- end:  Generated for t_rule_instance_group_segment From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_mchnt_app From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TmchntApp.hbm.xml</value>
+<!-- end:  Generated for t_mchnt_app From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskcase_record From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TriskcaseRecord.hbm.xml</value>
+<!-- end:  Generated for t_riskcase_record From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_riskprocess_timelimit From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TriskprocessTimelimit.hbm.xml</value>
+<!-- end:  Generated for t_riskprocess_timelimit From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- start:  Generated for t_trans_info From Template: applicationContext-hibernate.xml.hibvm  -->
+    <value>cn/com/brilliance/begen/model/TtransInfo.hbm.xml</value>
+<!-- end:  Generated for t_trans_info From Template: applicationContext-hibernate.xml.hibvm  -->
+<!-- Add new hbm.xml before -->			    
+            </list>
+        </property>
+        <!-- The property below is commented out b/c it doesn't work when run via
+             Ant in Eclipse.  It works fine for individual JUnit tests and in IDEA ??
+        <property name="mappingJarLocations">
+            <list><value>file:dist/appfuse-dao.jar</value></list>
+        </property>
+        -->
+        <property name="hibernateProperties">
+        <props>
+            <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+            <prop key="hibernate.query.factory_class">org.hibernate.hql.classic.ClassicQueryTranslatorFactory</prop>
+            <!-- Create/update the database tables automatically when the JVM starts up
+            <prop key="hibernate.show_sql">true</prop>
+            <prop key="hibernate.hbm2ddl.auto">update</prop> -->
+            <!-- Turn batching off for better error messages under PostgreSQL 
+            <prop key="hibernate.jdbc.batch_size">0</prop> -->
+        </props>
+        </property>
+    </bean>
+
+
+
+<!-- start:  Generated for sys_action_edit_form From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysActionEditFormDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysActionEditFormDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_action_edit_form From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_action_list_form From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysActionListFormDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysActionListFormDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_action_list_form From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_action_list_rec From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysActionListRecDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysActionListRecDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_action_list_rec From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_action_view_form From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysActionViewFormDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysActionViewFormDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_action_view_form From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_app From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysAppDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysAppDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_app From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_autonumber From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysAutonumberDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysAutonumberDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_autonumber From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_data_object From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysDataObjectDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysDataObjectDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_data_object From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_field From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysFieldDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysFieldDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_field From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_form_layout From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysFormLayoutDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysFormLayoutDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_form_layout From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_item From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysItemDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysItemDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_item From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_list_field From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysListFieldDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysListFieldDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_list_field From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_list_layout From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysListLayoutDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysListLayoutDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_list_layout From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_menu From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysMenuDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysMenuDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_menu From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_org From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysOrgDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysOrgDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_org From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_portal_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysPortalDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysPortalDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_portal_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_portlet_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysPortletDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysPortletDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_portlet_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_relative From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysRelativeDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysRelativeDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_relative From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_relative_action From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysRelativeActionDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysRelativeActionDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_relative_action From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_report_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysReportDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysReportDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_report_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_report_field_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysReportFieldDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysReportFieldDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_report_field_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_report_group_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysReportGroupDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysReportGroupDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_report_group_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_report_query_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysReportQueryDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysReportQueryDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_report_query_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_role From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysRoleDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysRoleDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_role From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_role_authority From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysRoleAuthorityDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysRoleAuthorityDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_role_authority From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_section From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysSectionDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysSectionDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_section From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_user_authority From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysUserAuthorityDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysUserAuthorityDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_user_authority From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_user_role From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysUserRoleDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysUserRoleDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_user_role From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_user From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysUserDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysUserDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_user From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_daily_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysDailyDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysDailyDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_daily_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_daily_event From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysDailyEventDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysDailyEventDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_daily_event From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_daily_ins From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysDailyInsDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysDailyInsDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysDailyInsService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysDailyInsServiceImpl" autowire="byName">
+           		<property name="sysDailyInsDAO" ref="sysDailyInsDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_daily_ins From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_biz_service_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysBizServiceDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysBizServiceDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_biz_service_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_party From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysPartyDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysPartyDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_party From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_template From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysTemplateDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysTemplateDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_template From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_template_import From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysTemplateImportDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysTemplateImportDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_template_import From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_template_log From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysTemplateLogDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysTemplateLogDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_template_log From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_eca_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysEcaDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysEcaDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_eca_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_eca_action From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysEcaActionDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysEcaActionDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_eca_action From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_workflow_def From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysWorkflowDefDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysWorkflowDefDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_workflow_def From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_workflow_state From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysWorkflowStateDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysWorkflowStateDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+<!-- end:  Generated for sys_workflow_state From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_message From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysMessageDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysMessageDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysMessageService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysMessageServiceImpl" autowire="byName">
+           		<property name="sysMessageDAO" ref="sysMessageDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_message From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_workflow_ins_proc From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysWorkflowInsProcDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysWorkflowInsProcDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysWorkflowInsProcService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysWorkflowInsProcServiceImpl" autowire="byName">
+           		<property name="sysWorkflowInsProcDAO" ref="sysWorkflowInsProcDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_workflow_ins_proc From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_workflow_ins_task From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysWorkflowInsTaskDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysWorkflowInsTaskDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysWorkflowInsTaskService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysWorkflowInsTaskServiceImpl" autowire="byName">
+           		<property name="sysWorkflowInsTaskDAO" ref="sysWorkflowInsTaskDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_workflow_ins_task From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_transmit From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysTransmitDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysTransmitDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysTransmitService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysTransmitServiceImpl" autowire="byName">
+           		<property name="sysTransmitDAO" ref="sysTransmitDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_transmit From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_transmit_detail From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysTransmitDetailDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysTransmitDetailDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysTransmitDetailService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysTransmitDetailServiceImpl" autowire="byName">
+           		<property name="sysTransmitDetailDAO" ref="sysTransmitDetailDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_transmit_detail From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for sys_loginfo From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="sysLoginfoDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.SysLoginfoDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="sysLoginfoService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.SysLoginfoServiceImpl" autowire="byName">
+           		<property name="sysLoginfoDAO" ref="sysLoginfoDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for sys_loginfo From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for epc_ins_task From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="epcInsTaskDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.EpcInsTaskDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="epcInsTaskService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.EpcInsTaskServiceImpl" autowire="byName">
+           		<property name="epcInsTaskDAO" ref="epcInsTaskDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for epc_ins_task From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for epc_ins_proc From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="epcInsProcDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.EpcInsProcDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="epcInsProcService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.EpcInsProcServiceImpl" autowire="byName">
+           		<property name="epcInsProcDAO" ref="epcInsProcDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for epc_ins_proc From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_user_info From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tuserInfoDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TuserInfoDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tuserInfoService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TuserInfoServiceImpl" autowire="byName">
+           		<property name="tuserInfoDAO" ref="tuserInfoDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_user_info From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_organize_info From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="torganizeInfoDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TorganizeInfoDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="torganizeInfoService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TorganizeInfoServiceImpl" autowire="byName">
+           		<property name="torganizeInfoDAO" ref="torganizeInfoDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_organize_info From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_role_info From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="troleInfoDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TroleInfoDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="troleInfoService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TroleInfoServiceImpl" autowire="byName">
+           		<property name="troleInfoDAO" ref="troleInfoDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_role_info From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_organize_user From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="torganizeUserDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TorganizeUserDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="torganizeUserService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TorganizeUserServiceImpl" autowire="byName">
+           		<property name="torganizeUserDAO" ref="torganizeUserDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_organize_user From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_role_user From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="troleUserDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TroleUserDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="troleUserService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TroleUserServiceImpl" autowire="byName">
+           		<property name="troleUserDAO" ref="troleUserDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_role_user From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule_instance From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleInstanceDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleInstanceDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleInstanceService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleInstanceServiceImpl" autowire="byName">
+           		<property name="truleInstanceDAO" ref="truleInstanceDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule_instance From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_mchnt From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tmchntDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TmchntDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tmchntService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TmchntServiceImpl" autowire="byName">
+           		<property name="tmchntDAO" ref="tmchntDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_mchnt From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_mcc From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tmccDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TmccDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tmccService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TmccServiceImpl" autowire="byName">
+           		<property name="tmccDAO" ref="tmccDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_mcc From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_cardbin From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tcardbinDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TcardbinDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tcardbinService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TcardbinServiceImpl" autowire="byName">
+           		<property name="tcardbinDAO" ref="tcardbinDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_cardbin From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskcase_rulegroup From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskcaseRulegroupDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskcaseRulegroupDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskcaseRulegroupService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskcaseRulegroupServiceImpl" autowire="byName">
+           		<property name="triskcaseRulegroupDAO" ref="triskcaseRulegroupDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskcase_rulegroup From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskcase_attachment From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskcaseAttachmentDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskcaseAttachmentDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskcaseAttachmentService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskcaseAttachmentServiceImpl" autowire="byName">
+           		<property name="triskcaseAttachmentDAO" ref="triskcaseAttachmentDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskcase_attachment From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskcase_log From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskcaseLogDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskcaseLogDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskcaseLogService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskcaseLogServiceImpl" autowire="byName">
+           		<property name="triskcaseLogDAO" ref="triskcaseLogDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskcase_log From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskcase From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskcaseDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskcaseDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskcaseService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskcaseServiceImpl" autowire="byName">
+           		<property name="triskcaseDAO" ref="triskcaseDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskcase From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule_instance_mcc From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleInstanceMccDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleInstanceMccDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleInstanceMccService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleInstanceMccServiceImpl" autowire="byName">
+           		<property name="truleInstanceMccDAO" ref="truleInstanceMccDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule_instance_mcc From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleServiceImpl" autowire="byName">
+           		<property name="truleDAO" ref="truleDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_basearg From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tbaseargDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TbaseargDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tbaseargService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TbaseargServiceImpl" autowire="byName">
+           		<property name="tbaseargDAO" ref="tbaseargDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_basearg From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_permission From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tpermissionDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TpermissionDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tpermissionService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TpermissionServiceImpl" autowire="byName">
+           		<property name="tpermissionDAO" ref="tpermissionDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_permission From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_keo_mchnt From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tkeoMchntDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TkeoMchntDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tkeoMchntService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TkeoMchntServiceImpl" autowire="byName">
+           		<property name="tkeoMchntDAO" ref="tkeoMchntDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_keo_mchnt From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule_group From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleGroupDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleGroupDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleGroupService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleGroupServiceImpl" autowire="byName">
+           		<property name="truleGroupDAO" ref="truleGroupDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule_group From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule_instance_group From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleInstanceGroupDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleInstanceGroupDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleInstanceGroupService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleInstanceGroupServiceImpl" autowire="byName">
+           		<property name="truleInstanceGroupDAO" ref="truleInstanceGroupDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule_instance_group From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_rule_instance_group_segment From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="truleInstanceGroupSegmentDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TruleInstanceGroupSegmentDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="truleInstanceGroupSegmentService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TruleInstanceGroupSegmentServiceImpl" autowire="byName">
+           		<property name="truleInstanceGroupSegmentDAO" ref="truleInstanceGroupSegmentDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_rule_instance_group_segment From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_mchnt_app From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="tmchntAppDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TmchntAppDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="tmchntAppService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TmchntAppServiceImpl" autowire="byName">
+           		<property name="tmchntAppDAO" ref="tmchntAppDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_mchnt_app From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskcase_record From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskcaseRecordDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskcaseRecordDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskcaseRecordService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskcaseRecordServiceImpl" autowire="byName">
+           		<property name="triskcaseRecordDAO" ref="triskcaseRecordDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskcase_record From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_riskprocess_timelimit From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="triskprocessTimelimitDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TriskprocessTimelimitDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="triskprocessTimelimitService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TriskprocessTimelimitServiceImpl" autowire="byName">
+           		<property name="triskprocessTimelimitDAO" ref="triskprocessTimelimitDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_riskprocess_timelimit From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- start:  Generated for t_trans_info From Template: applicationContext-hibernate.xml.beansvm  -->
+    <bean id="ttransInfoDAO" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.dao.hibernate.TtransInfoDAOHibernate" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+    
+    <bean id="ttransInfoService" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.TtransInfoServiceImpl" autowire="byName">
+           		<property name="ttransInfoDAO" ref="ttransInfoDAO" />
+           </bean>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="delete*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED,readOnly</prop>
+            </props>
+        </property>
+    </bean>    
+<!-- end:  Generated for t_trans_info From Template: applicationContext-hibernate.xml.beansvm  -->
+<!-- Add new DAOs before -->    
+    <bean id="permissionWorkflowManager" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.PermissionWorkflowManagerImpl" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>       
+    <bean id="messageManager" parent="txProxyTemplate">
+       <property name="target"> 
+           <bean class="cn.com.brilliance.begen.service.impl.MessageManagerImpl" autowire="byName"/>
+       </property>
+       <property name="transactionAttributes">
+            <props>
+                <prop key="save*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_REQUIRED</prop>
+            </props>
+        </property>
+    </bean>            
+</beans>    			    

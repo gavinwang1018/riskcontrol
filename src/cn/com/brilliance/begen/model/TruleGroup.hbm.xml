@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.TruleGroup"
+        table="t_rule_group"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="native" />
+        </id>
+        <property
+            name="belongToInst"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="belong_to_inst"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="description"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="description"
+            length="255"
+            unique="false"
+        />
+        <property
+            name="enable"
+            type="java.lang.Boolean"
+            update="true"
+            insert="true"
+            access="property"
+            column="enable"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="status"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="status"
+            length="250"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="belong_to_inst"
+			name="belongToInstOfTorganizeInfo"
+			class="cn.com.brilliance.begen.model.TorganizeInfo"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

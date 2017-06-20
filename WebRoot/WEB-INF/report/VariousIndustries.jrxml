@@ -1,0 +1,2160 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="Untitled_report_1"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="1161"
+		 pageHeight="1437"
+		 columnWidth="1101"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="STAT_TYPE_1" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("1")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_2" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("2")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_3" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("3")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_17" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("17")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_18" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("18")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_19" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("19")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_24" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("24")]]></defaultValueExpression>
+	</parameter>
+	<parameter name="STAT_TYPE_26" isForPrompting="false" class="java.lang.String">
+		<defaultValueExpression ><![CDATA[new String("26")]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[select * from t_report r,t_mcc m where r.mcc=m.mcc_code order by m.bigmcc_code]]></queryString>
+
+	<field name="ID" class="java.math.BigDecimal"/>
+	<field name="MONTH" class="java.lang.String"/>
+	<field name="STAT_DATE" class="java.sql.Timestamp"/>
+	<field name="CASE_NUM" class="java.math.BigDecimal"/>
+	<field name="MCHNT_NUM" class="java.math.BigDecimal"/>
+	<field name="TRANS_NUM" class="java.math.BigDecimal"/>
+	<field name="TRANS_AMT" class="java.math.BigDecimal"/>
+	<field name="STAT_TYPE" class="java.lang.String"/>
+	<field name="BELONG_TO_INST" class="java.math.BigDecimal"/>
+	<field name="MCC" class="java.math.BigDecimal"/>
+	<field name="MCC_NAME" class="java.lang.String"/>
+	<field name="MCC_CODE" class="java.lang.String"/>
+	<field name="BIGMCC_NAME" class="java.lang.String"/>
+	<field name="BIGMCC_CODE" class="java.lang.String"/>
+	<field name="MIDMCC_NAME" class="java.lang.String"/>
+	<field name="MIDMCC_CODE" class="java.lang.String"/>
+
+	<variable name="TYPE1_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_1}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_1}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_1}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_1}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_17}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_17}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_17}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_17}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_18}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_18}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_18}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_18}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_19}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_19}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_19}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_19}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_24}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_24}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_24}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_19}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE26_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_26}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE26_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_26}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_3}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_3}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_3}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_3}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_CASE_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_2}))?new Integer($F{CASE_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_MCHNT_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_2}))?new Integer($F{MCHNT_NUM}.intValue()):new Integer(0)]]></variableExpression>
+	</variable>
+	<variable name="TYPE2_TRANS_NUM" class="java.lang.Integer" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_2}))?new Integer($F{TRANS_NUM}.intValue()):new Integer(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_TRANS_AMT" class="java.lang.Double" resetType="Group" resetGroup="STAT_TYPE" calculation="Nothing">
+		<variableExpression><![CDATA[($F{STAT_TYPE}.equalsIgnoreCase($P{STAT_TYPE_2}))?new Double($F{TRANS_AMT}.intValue()):new Double(0)]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="CASE_NUM_COUNT" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_CASE_NUM}.intValue()+$V{TYPE18_CASE_NUM}.intValue()+$V{TYPE19_CASE_NUM}.intValue()+$V{TYPE24_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="MCHNT_NUM_COUNT" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_MCHNT_NUM}.intValue()+$V{TYPE18_MCHNT_NUM}.intValue()+$V{TYPE19_MCHNT_NUM}.intValue()+$V{TYPE24_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TRANS_NUM_COUNT" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_TRANS_NUM}.intValue()+$V{TYPE18_TRANS_NUM}.intValue()+$V{TYPE19_TRANS_NUM}.intValue()+$V{TYPE24_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TRANS_AMT_COUNT" class="java.lang.Double" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Double($V{TYPE17_TRANS_AMT}.intValue()+$V{TYPE18_TRANS_AMT}.intValue()+$V{TYPE19_TRANS_AMT}.intValue()+$V{TYPE24_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_CASE_NUM" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_CASE_NUM}.intValue()-$V{TYPE2_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_MCHNT_NUM" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_MCHNT_NUM}.intValue()-$V{TYPE2_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_TRANS_NUM" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_TRANS_NUM}.intValue()-$V{TYPE2_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_TRANS_AMT" class="java.lang.Double" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Double($V{TYPE1_TRANS_AMT}.intValue()-$V{TYPE2_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE1_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE1_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE1_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE17_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE17_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE17_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE18_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE18_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE18_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE18_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE18_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE19_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE19_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE19_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE19_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE19_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE24_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE24_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE24_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE24_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE24_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE26_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE26_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE26_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE26_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE3_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE3_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE3_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE3_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE3_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE2_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Report" calculation="Nothing">
+		<variableExpression><![CDATA[new Integer($V{TYPE2_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TYPE2_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TYPE2_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TYPE2_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_CASE_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{OTHER_CASE_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_MCHNT_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{OTHER_MCHNT_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_TRANS_NUM_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{OTHER_TRANS_NUM}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="OTHER_TRANS_AMT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{OTHER_TRANS_AMT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+	<variable name="CASE_NUM_COUNT_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{CASE_NUM_COUNT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="MCHNT_NUM_COUNT_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{MCHNT_NUM_COUNT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TRANS_NUM_COUNT_SUM" class="java.lang.Integer" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Integer($V{TRANS_NUM_COUNT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Integer(0)]]></initialValueExpression>
+	</variable>
+	<variable name="TRANS_AMT_COUNT_SUM" class="java.lang.Double" resetType="Column" calculation="Sum">
+		<variableExpression><![CDATA[new Double($V{TRANS_AMT_COUNT}.intValue())]]></variableExpression>
+		<initialValueExpression><![CDATA[new Double(0)]]></initialValueExpression>
+	</variable>
+
+		<group  name="STAT_TYPE" >
+			<groupExpression><![CDATA[$F{STAT_TYPE}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<group  name="BIGMCC_CODE" >
+			<groupExpression><![CDATA[$F{BIGMCC_CODE}]]></groupExpression>
+			<groupHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupHeader>
+			<groupFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+			</groupFooter>
+		</group>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="153"
+						y="0"
+						width="778"
+						height="50"
+						key="staticText-53"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="24"/>
+					</textElement>
+				<text><![CDATA[各行业疑似风险商户案例处理情况统计表]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="30"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="98"
+						height="30"
+						key="staticText-54"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[机构名称：]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="907"
+						y="5"
+						width="176"
+						height="23"
+						key="staticText-62"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement>
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[统计单位：个、家、笔、万元]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="144"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="101"
+						height="144"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[分支机构]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="101"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-4"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="127"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-5"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="153"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-6"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="179"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-7"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="205"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-8"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="231"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-9"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="257"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-10"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="283"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-11"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="309"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-12"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="335"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-13"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="361"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-14"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="387"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-15"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="413"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-16"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="439"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-17"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="465"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-18"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="491"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-19"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="517"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-20"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="543"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-21"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="569"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-22"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="595"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-23"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="621"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-24"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="647"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-25"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="673"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-26"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="699"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-27"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="101"
+						y="0"
+						width="104"
+						height="48"
+						key="staticText-28"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[疑似案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="205"
+						y="0"
+						width="520"
+						height="26"
+						key="staticText-29"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[已确认风险及类型分布]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="205"
+						y="26"
+						width="104"
+						height="22"
+						key="staticText-30"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[小计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="309"
+						y="26"
+						width="104"
+						height="22"
+						key="staticText-31"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[套现]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="413"
+						y="26"
+						width="104"
+						height="22"
+						key="staticText-32"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[侧录]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="517"
+						y="26"
+						width="104"
+						height="22"
+						key="staticText-33"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[洗单]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="621"
+						y="26"
+						width="104"
+						height="22"
+						key="staticText-34"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[其他]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="725"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-35"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="751"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-36"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="777"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-37"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="803"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-38"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="829"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-39"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="855"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-40"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="881"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-41"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="907"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-42"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="933"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-43"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="959"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-44"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="985"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-45"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="1011"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-46"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="1037"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-47"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="1063"
+						y="48"
+						width="26"
+						height="96"
+						key="staticText-48"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="725"
+						y="0"
+						width="52"
+						height="48"
+						key="staticText-49"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[终止协议数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="777"
+						y="0"
+						width="104"
+						height="48"
+						key="staticText-50"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[已排除风险案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="881"
+						y="0"
+						width="104"
+						height="48"
+						key="staticText-51"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[未处理案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						x="985"
+						y="0"
+						width="104"
+						height="48"
+						key="staticText-52"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="14"/>
+					</textElement>
+				<text><![CDATA[正在处理和已处理案例]]></text>
+				</staticText>
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="25"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="24"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{BIGMCC_CODE}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="49"
+						y="0"
+						width="52"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{MCC_NAME}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="101"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle" lineSpacing="Single">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="127"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="153"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="179"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE1_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="309"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="335"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="361"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="387"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE17_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="413"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="439"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="465"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="491"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE18_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="517"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="543"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="569"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="595"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE19_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="621"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="647"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="673"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="699"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE24_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="725"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE26_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="751"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE26_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="777"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="803"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="829"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="855"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE3_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="881"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="907"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="933"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="959"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE2_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="985"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_CASE_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1011"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_MCHNT_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1037"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_TRANS_NUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1063"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{OTHER_TRANS_AMT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="205"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{CASE_NUM_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="231"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{MCHNT_NUM_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="257"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TRANS_NUM_COUNT}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="283"
+						y="0"
+						width="26"
+						height="25"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TRANS_AMT_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="24"
+						y="0"
+						width="25"
+						height="25"
+						key="staticText-60"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<text><![CDATA[类]]></text>
+				</staticText>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="30"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="50"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<lastPageFooter>
+			<band height="33"  isSplitAllowed="true" >
+			</band>
+		</lastPageFooter>
+		<summary>
+			<band height="26"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="101"
+						height="26"
+						key="staticText-61"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="18"/>
+					</textElement>
+				<text><![CDATA[合计：]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="101"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="127"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="153"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE1_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="179"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE1_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="335"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="309"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="361"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE17_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="387"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE17_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="413"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="439"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="465"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE18_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="491"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE18_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="517"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="543"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="569"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE19_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="595"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE19_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="621"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="647"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="673"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE24_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="699"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE24_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="725"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE26_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="751"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE26_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="777"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="803"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="829"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE3_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="855"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE3_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="881"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="907"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="932"
+						y="0"
+						width="27"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TYPE2_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="959"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TYPE2_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="985"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_CASE_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1011"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_MCHNT_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1037"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{OTHER_TRANS_NUM_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1063"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{OTHER_TRANS_AMT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="205"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{CASE_NUM_COUNT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="231"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{MCHNT_NUM_COUNT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="257"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Integer"><![CDATA[$V{TRANS_NUM_COUNT_SUM}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="283"
+						y="0"
+						width="26"
+						height="26"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.Double"><![CDATA[$V{TRANS_AMT_COUNT_SUM}]]></textFieldExpression>
+				</textField>
+			</band>
+		</summary>
+</jasperReport>

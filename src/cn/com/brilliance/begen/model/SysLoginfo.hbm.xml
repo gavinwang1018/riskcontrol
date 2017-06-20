@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysLoginfo"
+        table="sys_loginfo"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="operator"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[operator]"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="operationType"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[operation_type]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="operationTitle"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[operation_title]"
+            length="200"
+            unique="false"
+        />
+        <property
+            name="operationTime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="[operation_time]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="clientIp"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[client_ip]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="terminalType"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[terminal_type]"
+            length="100"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="operator"
+			name="operatorOfSysUser"
+			class="cn.com.brilliance.begen.model.SysUser"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysRelativeAction"
+        table="sys_relative_action"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="rule"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[rule]"
+            length="1000"
+            unique="false"
+        />
+        <property
+            name="inputField"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[input_field]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="formLayout"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[form_layout]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="form_layout"
+			name="formLayoutOfSysFormLayout"
+			class="cn.com.brilliance.begen.model.SysFormLayout"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

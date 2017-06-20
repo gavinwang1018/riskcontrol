@@ -1,0 +1,293 @@
+#set($belongToInst = $triskcase.belongToInst)
+#set($belongToInstName = $recordHelper.getBelongInstName($belongToInst))
+#set($createdate = $triskcase.createdate)
+#set($dateName = $recordHelper.getCreateDate($createdate))
+#set($casefrom = $triskcase.casefrom)
+#set($casefromName = $recordHelper.getCasefrom($casefrom))
+#set($caseno = $triskcase.caseno)
+#set($otherno = $triskcase.otherno)
+#set($level = $triskcase.warnLevel)
+#set($levelName = $recordHelper.getLevel($level))
+#set($mchntName = $triskcase.mchntName)
+#set($mchntCd = $triskcase.mchntCd)
+#set($mchntMcc = $triskcase.mchntMcc)
+#set($acquireInst = $triskcase.acquireInstName)
+#if($acquireInst != "") 
+#set($acquireInstName = $recordHelper.getBelongInstName($acquireInst))
+#end
+#set($relativeTransNum = $triskcase.relativeTransNum)
+#set($relativeTransAmt = $triskcase.relativeTransAmt)
+
+#set($investigationdate = $triskcaseRecord.investigationDate)
+#set($investigationdateName = $recordHelper.getCreateDate($investigationdate))
+#set($investigationWay = $triskcaseRecord.investigationWay)
+#set($isPickFlow = $triskcaseRecord.isPickFlow)
+#set($pickCnt = $triskcaseRecord.pickCnt)
+#set($pickAmt = $triskcaseRecord.pickAmt)
+#set($pick180Cnt = $triskcaseRecord.pick180Cnt)
+#set($pick180Amt = $triskcaseRecord.pick180Amt)
+#set($pickStatus = $triskcaseRecord.pickStatus)
+#set($pickFlawCnt = $triskcaseRecord.pickFlawCnt)
+#set($pickEmptyCnt = $triskcaseRecord.pickEmptyCnt)
+#set($riskLevel = $triskcaseRecord.riskLevel)
+#set($riskType = $triskcaseRecord.riskType)
+#set($processType = $triskcaseRecord.processType)
+#set($description = $triskcaseRecord.description)
+#set($processFreezeAmt = $triskcaseRecord.processFreezeAmt)
+#set($processWithdrawCnt = $triskcaseRecord.processWithdrawCnt)
+#set($pickFlawCnt = $triskcaseRecord.pickFlawCnt)
+#set($pickEmptyCnt = $triskcaseRecord.pickEmptyCnt)
+#set($reason = $triskcaseRecord.reason)
+#set($process2Type = $triskcaseRecord.process2Type)
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" /> 
+<title>疑似风险商户案例调查处理工作单</title>
+</head>
+
+<body>
+<!--startprint-->
+<table width="80%" border="0" align="center">
+  <tr>
+    <td valign="top"><table width="100%" border="0">
+        <tr> 
+          <td colspan="2"><div align="center"><strong>疑似风险商户案例调查处理工作单</strong></div></td>
+        </tr>
+        <tr> 
+          <td width="46%">机构名称: $belongToInstName</td>
+          <td width="54%">填报日期: $dateName</td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td valign="top"><table width="100%" border="2" cellspacing="0" bordercolor="#000000">
+        <tr>
+          <td valign="top"><table width="100%" border="1" cellspacing="0" bordercolor="#000000">
+              <tr> 
+                <td width="18%">案例来源</td>
+                <td colspan="3">$casefromName</td>
+              </tr>
+              <tr> 
+                <td>案例编号</td>
+                <td width="32%">$caseno</td>
+                <td width="17%">银联商户风险监控系统生成的案例编号</td>
+#if($otherno != "") 				
+                <td width="33%">$otherno</td>
+#else
+		        <td width="33%">&nbsp;</td>
+#end					
+              </tr>
+              <tr> 
+                <td>案例接收时间</td>
+                <td>$dateName</td>
+                <td>风险等级</td>
+                <td>$levelName</td>
+              </tr>
+              <tr> 
+                <td>商户名称</td>
+#if($mchntName != "")
+                <td>$mchntName</td>
+#else
+	            <td>&nbsp;</td>
+#end					
+                <td>商户编号</td>
+#if($mchntCd != "")				
+                <td>$mchntCd</td>
+#else
+	            <td>&nbsp;</td>
+#end					
+              </tr>
+              <tr> 
+                <td>商户MCC编号</td>
+#if($mchntMcc != "")					
+                <td>$mchntMcc</td>
+#else				
+		        <td>&nbsp;</td>		
+#end					
+                <td>收单机构名称</td>
+#if($acquireInstName != "")	
+		        <td>$acquireInstName</td>
+#else				
+                <td>&nbsp;</td>
+#end					
+              </tr>
+              <tr> 
+                <td>终端布放数量</td>
+                <td>&nbsp;</td>
+                <td>终端类型</td>
+                <td>&nbsp;</td>
+              </tr>
+              <tr> 
+                <td>涉及交易笔数</td>
+#if($relativeTransNum != "")					
+                <td>$relativeTransNum</td>
+#else
+	            <td>&nbsp;</td>
+#end					
+                <td>涉及交易金额</td>
+#if($relativeTransAmt != "")					
+                <td>$relativeTransAmt</td>
+#else
+	            <td>&nbsp;</td>
+#end				
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td valign="top"><table width="100%" border="1" cellspacing="0" bordercolor="#000000">
+              <tr> 
+                <td colspan="4" valign="top"><div align="center"><strong>调查处理情况</strong></div></td>
+              </tr>
+              <tr> 
+                <td width="18%">调查时间</td>
+#if($investigationdateName != "") 				
+                <td colspan="3">$investigationdateName</td>
+#else				
+		        <td colspan="3">&nbsp;</td>
+#end				
+              </tr>
+              <tr> 
+                <td>调查方式</td>
+                <td colspan="3"><form name="form1" method="post" action="">
+                    <input type="checkbox" name="checkbox" value="checkbox" #if($investigationWay=="0") checked #end disabled="true">
+                    实地调查 　 
+                    <input type="checkbox" name="checkbox2" value="checkbox" #if($investigationWay=="1") checked #end disabled="true">
+                    电话调查 　 
+                    <input type="checkbox" name="checkbox3" value="checkbox" #if($investigationWay=="2") checked #end disabled="true">
+                    信函调查　 
+                    <input type="checkbox" name="checkbox4" value="checkbox" #if($investigationWay=="3") checked #end disabled="true">
+                    其他方式 </form></td>
+              </tr>
+              <tr> 
+                <td rowspan="3">调单核查情况</td>
+                <td colspan="3"><form name="form3" method="post" action="">
+                    <input type="checkbox" name="checkbox7" value="checkbox" #if($isPickFlow==0) checked #end disabled="true">
+                    未启动调单流程 　
+                    <input type="checkbox" name="checkbox8" value="checkbox" #if($isPickFlow==1) checked #end disabled="true">
+                    启动调单流程 
+                  </form></td>
+              </tr>
+              <tr> 
+				<td height="64">本案例涉及交易的调单情况</td>
+                <td>调到单据#if(${pickCnt}!="")${pickCnt}#end 张<br>
+                  涉及金额#if(${pickAmt})${pickAmt}#end 元<br></td>
+                <td rowspan="2"> 
+                  <form name="form4" method="post" action="">
+                    <p> 
+                      <input type="checkbox" name="checkbox9" value="checkbox" #if($pickStatus=="0") checked #end disabled="true">
+                      单据合规无瑕疵</p>
+                    <p> 
+                      <input type="checkbox" name="checkbox10" value="checkbox" #if($pickStatus=="1") checked #end disabled="true">
+                      单据有瑕疵  原因:#if(${pickFlawCnt}!="")${pickFlawCnt}#end</p>
+                    <p> 
+                      <input type="checkbox" name="checkbox11" value="checkbox" #if($pickStatus=="2") checked #end disabled="true">
+                      商户无法提供单据  原因:#if(${pickEmptyCnt}!="")${pickEmptyCnt}#end<br>
+                    </p>
+                  </form></td>
+              </tr>
+              <tr> 
+                <td height="64">180天内交易调单情况</td>
+                <td>调到单据#if($pick180Cnt!="")${pick180Cnt}#end 张<br>
+                  涉及金额#if($pick180Amt!="")${pick180Amt}#end 元<br></td>
+              </tr>
+              <tr> 
+                <td rowspan="3">调查结论</td>
+                <td colspan="3">正常交易，无风险。触发监控规则的原因是#if(${reason}!="")${reason}#end</td>
+              </tr>
+              <tr> 
+                <td width="13%" rowspan="2">交易存在风险<br></td>
+                <td width="19%">风险程度</td>
+                <td width="50%"><form name="form7" method="post" action="">
+                    <input type="checkbox" name="checkbox21" #if($riskLevel=="1") checked #end value="checkbox" disabled="true">
+                    较高 
+                    <input type="checkbox" name="checkbox22" #if($riskLevel=="2") checked #end value="checkbox" disabled="true">
+                    一般 
+                    <input type="checkbox" name="checkbox23" #if($riskLevel=="3") checked #end value="checkbox" disabled="true">
+                    较低 
+                  </form></td>
+              </tr>
+              <tr> 
+                <td>风险类型</td>
+                <td><form name="form8" method="post" action="">
+                    <input type="checkbox" name="checkbox24" #if($riskType=="0") checked #end value="checkbox" disabled="true">
+                    套现 
+                    <input type="checkbox" name="checkbox25" #if($riskType=="1") checked #end value="checkbox" disabled="true">
+                    侧录 
+                    <input type="checkbox" name="checkbox26" #if($riskType=="2") checked #end value="checkbox" disabled="true">
+                    洗单 
+					<input type="checkbox" name="checkbox27" #if($riskType=="3") checked #end value="checkbox" disabled="true">
+                    虚假申请 					
+                    <input type="checkbox" name="checkbox28" #if($riskType=="4") checked #end value="checkbox" disabled="true">
+                    其它 
+                  </form></td>
+              </tr>
+              <tr> 
+                <td rowspan="2">处理措施</td>
+                <td colspan="3"><form name="form5" method="post" action="">
+                    <input type="checkbox" name="checkbox12" value="checkbox" #if($process2Type=="0") checked #end disabled="true">
+                    警告 　　
+                    <input type="checkbox" name="checkbox13" value="checkbox" #if($process2Type=="1") checked #end disabled="true">
+                    终止协议 
+                    <input type="checkbox" name="checkbox20" value="checkbox" #if($process2Type=="2") checked #end disabled="true">
+                    交收单机构                    
+                  </form></td>
+              </tr>
+              <tr> 
+                <td colspan="3"><form name="form6" method="post" action="">
+                    <input type="checkbox" name="checkbox14" value="checkbox" #if($processType=="00") checked #end disabled="true">
+                    口头警告 
+                    <input type="checkbox" name="checkbox15" value="checkbox" #if($processType=="01") checked #end disabled="true">
+                    书面警告 
+                    <input type="checkbox" name="checkbox16" value="checkbox" #if($processType=="10") checked #end disabled="true">
+                    暂停交易 
+                    <input type="checkbox" name="checkbox17" value="checkbox" #if($processType=="11") checked #end disabled="true">
+                    暂缓资金结算#if(${processFreezeAmt}!="")${processFreezeAmt}#end 元 
+                    <input type="checkbox" name="checkbox18" value="checkbox" #if($processType=="12") checked #end disabled="true">
+                    撤机#if(${processWithdrawCnt}!="")${processWithdrawCnt}#end 台 
+                    <input type="checkbox" name="checkbox19" value="checkbox" #if($processType=="13") checked #end disabled="true">
+                    其它 
+                  </form></td>
+              </tr>
+              <tr> 
+                <td>相关情况说明</td>
+#if($description != "")			
+                <td colspan="3"><p>${description}</p>
+#else
+	            <td colspan="3"><p>&nbsp;</p>
+#end					
+                  <p>&nbsp;</p></td>
+              </tr>
+            </table></td>
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td valign="top"><table width="100%" border="0">
+        <tr>
+          <td width="32%">填表人:</td>
+          <td width="33%">部门负责人:</td>
+          <td width="35%">分支机构分管领导:</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+<!--endprint-->	
+<tr><div id="print" align="center">
+<input type="button" name="print" value="打印" onclick="doPrint();" /></div></tr>
+</body>
+<script language=javascript>
+function doPrint() { 
+	bdhtml=window.document.body.innerHTML; 
+	sprnstr="<!--startprint-->"; 
+	eprnstr="<!--endprint-->"; 
+	prnhtml=bdhtml.substring(bdhtml.indexOf(sprnstr) + 17); 
+	prnhtml=prnhtml.substring(0,prnhtml.indexOf(eprnstr)); 
+	window.document.body.innerHTML=prnhtml; 
+	window.print(); 
+	window.document.body.innerHTML = bdhtml;
+}
+</script>
+
+</html>

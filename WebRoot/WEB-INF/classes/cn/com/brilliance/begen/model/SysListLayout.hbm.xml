@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysListLayout"
+        table="sys_list_layout"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="dataObject"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[data_object]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="name"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[name]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="label"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[label]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="description"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[description]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="formLayout"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[form_layout]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="scroller"
+            type="java.lang.Boolean"
+            update="true"
+            insert="true"
+            access="property"
+            column="[scroller]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="scrollerSize"
+            type="java.lang.Integer"
+            update="true"
+            insert="true"
+            access="property"
+            column="[scroller_size]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="url"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[url]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="style"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[style]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="multiSelect"
+            type="java.lang.Boolean"
+            update="true"
+            insert="true"
+            access="property"
+            column="[multi_select]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="sysRecordOrder"
+            type="java.lang.Integer"
+            update="true"
+            insert="true"
+            access="property"
+            column="sys_record_order"
+            unique="false"
+        />
+ <!-- Imported bi-directional one-to-many association to SysActionListRec -->
+	<set name="sysActionListRecGroup"
+	     table="sys_action_list_rec"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="sys_list_layout"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysActionListRec"
+		/>
+	</set>     
+ <!-- Imported bi-directional one-to-many association to SysActionListForm -->
+	<set name="sysActionListFormGroup"
+	     table="sys_action_list_form"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="sys_list_layout"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysActionListForm"
+		/>
+	</set>     
+ <!-- Imported bi-directional one-to-many association to SysListField -->
+	<set name="sysListFieldGroup"
+	     table="sys_list_field"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="list_layout"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysListField"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="data_object"
+			name="dataObjectOfSysDataObject"
+			class="cn.com.brilliance.begen.model.SysDataObject"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

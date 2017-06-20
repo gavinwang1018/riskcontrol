@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysWorkflowInsProc"
+        table="sys_workflow_ins_proc"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="processDefId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[process_def_id]"
+            length="40"
+            unique="false"
+        />
+        <property
+            name="processState"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[process_state]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="processStart"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="[process_start]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="processEnd"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="[process_end]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="dataObjectKey"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[data_object_key]"
+            length="255"
+            unique="false"
+        />
+
+ <!-- Imported bi-directional one-to-many association to SysWorkflowInsTask -->
+	<set name="sysWorkflowInsTaskGroup"
+	     table="sys_workflow_ins_task"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	>
+		<key>
+			<column name="process_ins_id"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysWorkflowInsTask"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,3045 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="VariousBranches"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Landscape"
+		 pageWidth="1417"
+		 pageHeight="842"
+		 columnWidth="1357"
+		 columnSpacing="0"
+		 leftMargin="30"
+		 rightMargin="30"
+		 topMargin="20"
+		 bottomMargin="20"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false"
+		 isIgnorePagination="true">
+	<property name="ireport.scriptlethandling" value="0" />
+	<property name="ireport.encoding" value="UTF-8" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+
+	<parameter name="orgName" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="statBeginDate" isForPrompting="false" class="java.lang.String"/>
+	<parameter name="statEndDate" isForPrompting="false" class="java.lang.String"/>
+	<queryString><![CDATA[SELECT bigmcc_code kind,mcc,
+    nvl(wait_id_count,0)+nvl(now_id_count,0) "疑似案例案例数",
+    nvl(end_mchnt_count,0)+nvl(now_mchnt_count,0) "疑似案例商户数",
+    nvl(wait_num_count,0)+nvl(now_num_count,0) "疑似案例交易笔数",
+    nvl(wait_amt_count,0)+nvl(now_amt_count,0) "疑似案例交易金额",
+    nvl(rt0_id_count,0)+nvl(rt1_id_count,0)+nvl(rt2_id_count,0)+nvl(rt4_id_count,0) "小计案例数",
+    nvl(rt0_mchnt_count,0)+nvl(rt1_mchnt_count,0)+nvl(rt2_mchnt_count,0)+nvl(rt4_mchnt_count,0) "小计商户数",
+    nvl(rt0_num_count,0)+nvl(rt1_num_count,0)+nvl(rt2_num_count,0)+nvl(rt4_num_count,0) "小计交易笔数",
+    nvl(rt0_amt_count,0)+nvl(rt1_amt_count,0)+nvl(rt2_amt_count,0)+nvl(rt4_amt_count,0) "小计交易金额",
+nvl(rt0_id_count,0) "套现案例数",nvl(rt0_mchnt_count,0) "套现商户数",nvl(rt0_num_count,0) "套现交易笔数",nvl(rt0_amt_count,0) "套现交易金额", 
+nvl(rt1_id_count,0) "侧录案例数",nvl(rt1_mchnt_count,0) "侧录商户数",nvl(rt1_num_count,0) "侧录交易笔数",nvl(rt1_amt_count,0) "侧录交易金额",
+nvl(rt2_id_count,0) "洗单案例数",nvl(rt2_mchnt_count,0) "洗单商户数",nvl(rt2_num_count,0) "洗单交易笔数",nvl(rt2_amt_count,0) "洗单交易金额",
+nvl(rt4_id_count,0) "其他案例数",nvl(rt4_mchnt_count,0) "其他商户数",nvl(rt4_num_count,0) "其他交易笔数",nvl(rt4_amt_count,0) "其他交易金额",
+nvl(end_id_count,0) "终止协议案例数",nvl(end_mchnt_count,0) "终止协议商户数",
+nvl(exl_id_count,0) "已排除风险案例数",nvl(exl_mchnt_count,0) "已排除风险商户数",nvl(exl_num_count,0) "已排除风险交易笔数",nvl(exl_amt_count,0) "已排除风险交易金额",
+nvl(wait_id_count,0) "未处理案例案例数",nvl(wait_mchnt_count,0) "未处理案例商户数",nvl(wait_num_count,0) "未处理案例交易笔数",nvl(wait_amt_count,0) "未处理案例交易金额",
+nvl(now_id_count,0) "正在处理和已处理案例案例数",nvl(now_mchnt_count,0) "正在处理和已处理案例商户数",nvl(now_num_count,0) "正在处理和已处理案例交易笔数",nvl(now_amt_count,0) "正在处理和已处理案例交易金额",'0' as "ALL"
+   FROM(
+    SELECT * FROM
+    (
+      SELECT * FROM
+      (
+        SELECT * FROM
+        (
+          SELECT *
+                 FROM(
+            SELECT mcc,
+                   SUM(decode(rt,0,id_count,NULL)) rt0_id_count,
+                   SUM(decode(rt,1,id_count,NULL)) rt1_id_count,
+                   SUM(decode(rt,2,id_count,NULL)) rt2_id_count, 
+                   SUM(decode(rt,4,id_count,NULL)) rt4_id_count,
+                   SUM(decode(rt,0,mchnt_count,NULL)) rt0_mchnt_count,
+                   SUM(decode(rt,1,mchnt_count,NULL)) rt1_mchnt_count,
+                   SUM(decode(rt,2,mchnt_count,NULL)) rt2_mchnt_count,
+                   SUM(decode(rt,4,mchnt_count,NULL)) rt4_mchnt_count,
+                   SUM(decode(rt,0,num_count,NULL)) rt0_num_count,
+                   SUM(decode(rt,1,num_count,NULL)) rt1_num_count,
+                   SUM(decode(rt,2,num_count,NULL)) rt2_num_count,
+                   SUM(decode(rt,4,num_count,NULL)) rt4_num_count,
+                   SUM(decode(rt,0,amt_count,NULL)) rt0_amt_count,
+                   SUM(decode(rt,1,amt_count,NULL)) rt1_amt_count,
+                   SUM(decode(rt,2,amt_count,NULL)) rt2_amt_count,
+                   SUM(decode(rt,4,amt_count,NULL)) rt4_amt_count
+            FROM(
+              SELECT trans_mcc mcc,risk_type rt,id_count,mchnt_count /*已确认风险类型*/
+                 ,amt_count,num_count
+              FROM
+              (
+              SELECT *  FROM ( 
+                    SELECT trans_mcc,risk_type,COUNT(*) id_count,COUNT(DISTINCT mchnt_cd) mchnt_count,
+                            SUM(relative_trans_amt) amt_count,
+                            SUM(relative_trans_num) num_count
+                            FROM t_riskcase t1 INNER JOIN  V_LAST_RISKCASE_RECORD t2 
+                            ON t1.ID = t2.RISKCASE_ID
+                            WHERE t1.createdate>to_date($P{statBeginDate},'yyyy-MM-dd')
+                            AND t1.createdate<to_date($P{statEndDate},'yyyy-MM-dd')
+                            GROUP BY risk_type,trans_mcc
+                     )
+                )
+            ) GROUP BY mcc
+          ) temp1 FULL JOIN (
+
+            SELECT trans_mcc end_mcc,COUNT(*) end_id_count,COUNT (DISTINCT mchnt_cd) end_mchnt_count  /*终止协
+
+  议*/
+              FROM t_riskcase t1 INNER JOIN V_LAST_RISKCASE_RECORD t2 
+              ON t1.ID = t2.RISKCASE_ID
+              WHERE t2.INVESTIGATION_RESULT =1 
+              AND t2.process_type LIKE '1%'
+              AND t1.createdate>to_date($P{statBeginDate},'yyyy-MM-dd')
+              AND t1.createdate<to_date($P{statEndDate},'yyyy-MM-dd')
+              GROUP BY trans_mcc
+          ) temp2 ON temp1.mcc=temp2.end_mcc
+        ) temp3 FULL JOIN(
+          SELECT trans_mcc exl_mcc,COUNT(*) exl_id_count,COUNT (DISTINCT mchnt_cd) exl_mchnt_count,  /*已排除
+
+  */
+            SUM(relative_trans_amt) exl_amt_count,
+            SUM(relative_trans_num) exl_num_count
+            FROM t_riskcase t1 INNER JOIN V_LAST_RISKCASE_RECORD t2
+            ON t1.ID = t2.RISKCASE_ID
+            WHERE t2.investigation_result=0
+            AND t1.createdate>to_date($P{statBeginDate},'yyyy-MM-dd')
+            AND t1.createdate<to_date($P{statEndDate},'yyyy-MM-dd')
+            GROUP BY trans_mcc
+        ) temp4 ON temp3.mcc=temp4.exl_mcc
+      ) temp5 FULL JOIN(
+        SELECT trans_mcc wait_mcc,COUNT(*) wait_id_count,COUNT (DISTINCT mchnt_cd) wait_mchnt_count,  /*未处理
+
+  */
+          SUM(relative_trans_amt) wait_amt_count,
+          SUM(relative_trans_num) wait_num_count
+          FROM t_riskcase t1 INNER JOIN V_LAST_RISKCASE_RECORD t2
+          ON t1.ID = t2.RISKCASE_ID
+          WHERE t1.status=1
+          AND t1.createdate>to_date($P{statBeginDate},'yyyy-MM-dd')
+          AND t1.createdate<to_date($P{statEndDate},'yyyy-MM-dd')        
+          GROUP BY trans_mcc
+      ) temp6 ON temp5.mcc=temp6.wait_mcc
+    ) temp7 FULL JOIN(
+      SELECT trans_mcc now_mcc,COUNT(*) now_id_count,COUNT (DISTINCT mchnt_cd) now_mchnt_count,  /*正或者已处
+
+  理*/
+        SUM(relative_trans_amt) now_amt_count,
+        SUM(relative_trans_num) now_num_count
+        FROM t_riskcase t1 INNER JOIN V_LAST_RISKCASE_RECORD t2
+        ON t1.ID = t2.RISKCASE_ID
+        WHERE t1.status>1
+        AND t1.createdate>to_date($P{statBeginDate},'yyyy-MM-dd')
+        AND t1.createdate<to_date($P{statEndDate},'yyyy-MM-dd')
+        GROUP BY trans_mcc
+    ) temp8 ON temp7.mcc=temp8.now_mcc
+  ) temp1 left JOIN t_mcc temp2 ON temp1.mcc=temp2.id
+order by bigmcc_code]]></queryString>
+
+	<field name="KIND" class="java.lang.String"/>
+	<field name="MCC" class="java.lang.String"/>
+	<field name="疑似案例案例数" class="java.math.BigDecimal"/>
+	<field name="疑似案例商户数" class="java.math.BigDecimal"/>
+	<field name="疑似案例交易笔数" class="java.math.BigDecimal"/>
+	<field name="疑似案例交易金额" class="java.math.BigDecimal"/>
+	<field name="小计案例数" class="java.math.BigDecimal"/>
+	<field name="小计商户数" class="java.math.BigDecimal"/>
+	<field name="小计交易笔数" class="java.math.BigDecimal"/>
+	<field name="小计交易金额" class="java.math.BigDecimal"/>
+	<field name="套现案例数" class="java.math.BigDecimal"/>
+	<field name="套现商户数" class="java.math.BigDecimal"/>
+	<field name="套现交易笔数" class="java.math.BigDecimal"/>
+	<field name="套现交易金额" class="java.math.BigDecimal"/>
+	<field name="侧录案例数" class="java.math.BigDecimal"/>
+	<field name="侧录商户数" class="java.math.BigDecimal"/>
+	<field name="侧录交易笔数" class="java.math.BigDecimal"/>
+	<field name="侧录交易金额" class="java.math.BigDecimal"/>
+	<field name="洗单案例数" class="java.math.BigDecimal"/>
+	<field name="洗单商户数" class="java.math.BigDecimal"/>
+	<field name="洗单交易笔数" class="java.math.BigDecimal"/>
+	<field name="洗单交易金额" class="java.math.BigDecimal"/>
+	<field name="其他案例数" class="java.math.BigDecimal"/>
+	<field name="其他商户数" class="java.math.BigDecimal"/>
+	<field name="其他交易笔数" class="java.math.BigDecimal"/>
+	<field name="其他交易金额" class="java.math.BigDecimal"/>
+	<field name="终止协议案例数" class="java.math.BigDecimal"/>
+	<field name="终止协议商户数" class="java.math.BigDecimal"/>
+	<field name="已排除风险案例数" class="java.math.BigDecimal"/>
+	<field name="已排除风险商户数" class="java.math.BigDecimal"/>
+	<field name="已排除风险交易笔数" class="java.math.BigDecimal"/>
+	<field name="已排除风险交易金额" class="java.math.BigDecimal"/>
+	<field name="未处理案例案例数" class="java.math.BigDecimal"/>
+	<field name="未处理案例商户数" class="java.math.BigDecimal"/>
+	<field name="未处理案例交易笔数" class="java.math.BigDecimal"/>
+	<field name="未处理案例交易金额" class="java.math.BigDecimal"/>
+	<field name="正在处理和已处理案例案例数" class="java.math.BigDecimal"/>
+	<field name="正在处理和已处理案例商户数" class="java.math.BigDecimal"/>
+	<field name="正在处理和已处理案例交易笔数" class="java.math.BigDecimal"/>
+	<field name="正在处理和已处理案例交易金额" class="java.math.BigDecimal"/>
+	<field name="ALL" class="java.lang.String"/>
+
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="50"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="112"
+						y="0"
+						width="944"
+						height="50"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="隶书" size="24"/>
+					</textElement>
+				<text><![CDATA[分支机构疑似风险商户案例处理情况统计表]]></text>
+				</staticText>
+			</band>
+		</title>
+		<pageHeader>
+			<band height="34"  isSplitAllowed="true" >
+				<staticText>
+					<reportElement
+						x="0"
+						y="0"
+						width="101"
+						height="34"
+						key="staticText-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="黑体" pdfFontName="Helvetica-Bold" size="14" isBold="true"/>
+					</textElement>
+				<text><![CDATA[机构名称：]]></text>
+				</staticText>
+				<textField isStretchWithOverflow="false" pattern="##0.00" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="101"
+						y="0"
+						width="193"
+						height="34"
+						key="textField-1"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="黑体" pdfFontName="Helvetica-Bold" size="14" isBold="true" isItalic="false"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$P{orgName}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="409"
+						y="0"
+						width="330"
+						height="34"
+						key="textField-2"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" size="14"/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["统计时间:  "+$P{statBeginDate}+" --- "+$P{statEndDate}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement
+						x="966"
+						y="0"
+						width="226"
+						height="34"
+						key="staticText-3"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="黑体" size="14"/>
+					</textElement>
+				<text><![CDATA[统计单位：个、家、笔、万元]]></text>
+				</staticText>
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="318"  isSplitAllowed="true" >
+				<crosstab >
+					<reportElement
+						x="0"
+						y="0"
+						width="1269"
+						height="318"
+						key="crosstab-1"/>
+					<crosstabHeaderCell>						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="74"
+						height="99"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[分支机构]]></text>
+				</staticText>
+						</cellContents>
+					</crosstabHeaderCell>					<rowGroup name="KIND" width="42" totalPosition="End">
+						<bucket>
+							<bucketExpression class="java.lang.String"><![CDATA[$F{KIND}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="1Point" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="42"
+						height="60"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$V{KIND}.equals("1")?new String("一类"):($V{KIND}.equals("2")?new String("二类"):($V{KIND}.equals("3")?new String("三类"):($V{KIND}.equals("4")?new String("四类"):($V{KIND}.equals("5")?new String("五类"):new String("")))))]]></textFieldExpression>
+				</textField>
+						</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="1Point" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="74"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["合计"]]></textFieldExpression>
+				</textField>
+						</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<rowGroup name="MCC" width="32" totalPosition="End">
+						<bucket>
+							<bucketExpression class="java.lang.String"><![CDATA[$F{MCC}]]></bucketExpression>
+						</bucket>
+						<crosstabRowHeader>
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="32"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$V{MCC}]]></textFieldExpression>
+				</textField>
+						</cellContents>
+						</crosstabRowHeader>
+						<crosstabTotalRowHeader>
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="32"
+						height="30"
+						key="textField"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font/>
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["小计"]]></textFieldExpression>
+				</textField>
+						</cellContents>
+						</crosstabTotalRowHeader>
+					</rowGroup>
+					<columnGroup name="ALL" height="99" totalPosition="End" headerPosition="Center">
+						<bucket>
+							<bucketExpression class="java.lang.String"><![CDATA[$F{ALL}]]></bucketExpression>
+						</bucket>
+						<crosstabColumnHeader>
+						<cellContents mode="Transparent">
+					<box topBorder="1Point" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="75"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="0"
+						width="120"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[疑似案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="50"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="25"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="0"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="120"
+						y="20"
+						width="120"
+						height="17"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[小计]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="195"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="170"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="145"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="120"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="315"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="290"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="265"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="240"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="435"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="410"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="385"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="360"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="555"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="530"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="505"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="480"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="675"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="650"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="625"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="600"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="745"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="720"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="240"
+						y="20"
+						width="120"
+						height="17"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[套现]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="360"
+						y="20"
+						width="120"
+						height="17"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[侧录]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="480"
+						y="20"
+						width="120"
+						height="17"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[洗单]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="600"
+						y="20"
+						width="120"
+						height="17"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[其他]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="720"
+						y="0"
+						width="50"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[终止协议数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="845"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="820"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="795"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="770"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="770"
+						y="0"
+						width="120"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[已排除风险案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="965"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="940"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="915"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="890"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="890"
+						y="0"
+						width="120"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[未处理案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1085"
+						y="37"
+						width="45"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易金额]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1060"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[交易笔数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1035"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[商户数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1010"
+						y="37"
+						width="25"
+						height="62"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[案例数]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="1010"
+						y="0"
+						width="120"
+						height="37"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[正在处理和已处理案例]]></text>
+				</staticText>
+				<staticText>
+					<reportElement
+						mode="Opaque"
+						x="120"
+						y="0"
+						width="600"
+						height="20"
+						forecolor="#FFFFFF"
+						backcolor="#999999"
+						key="staticText-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font fontName="宋体" pdfFontName="Helvetica-Bold" size="12" isBold="true"/>
+					</textElement>
+				<text><![CDATA[已确认风险及类型分布]]></text>
+				</staticText>
+						</cellContents>
+						</crosstabColumnHeader>
+					</columnGroup>
+
+					<measure name="套现案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{套现案例数}==null?new BigDecimal(0):$F{套现案例数}]]></measureExpression>
+					</measure>
+					<measure name="套现商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{套现商户数}==null?new BigDecimal(0):$F{套现商户数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{套现交易笔数}==null?new BigDecimal(0):$F{套现交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{套现交易金额}==null?new BigDecimal(0):$F{套现交易金额}]]></measureExpression>
+					</measure>
+					<measure name="侧录案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{侧录案例数}==null?new BigDecimal(0):$F{侧录案例数}]]></measureExpression>
+					</measure>
+					<measure name="侧录商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{侧录商户数}==null?new BigDecimal(0):$F{侧录商户数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{侧录交易笔数}==null?new BigDecimal(0):$F{侧录交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{侧录交易金额}==null?new BigDecimal(0):$F{侧录交易金额}]]></measureExpression>
+					</measure>
+					<measure name="洗单案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{洗单案例数}==null?new BigDecimal(0):$F{洗单案例数}]]></measureExpression>
+					</measure>
+					<measure name="洗单商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{洗单商户数}==null?new BigDecimal(0):$F{洗单商户数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{洗单交易笔数}==null?new BigDecimal(0):$F{洗单交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{洗单交易金额}==null?new BigDecimal(0):$F{洗单交易金额}]]></measureExpression>
+					</measure>
+					<measure name="其他案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{其他案例数}==null?new BigDecimal(0):$F{其他案例数}]]></measureExpression>
+					</measure>
+					<measure name="其他商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{其他商户数}==null?new BigDecimal(0):$F{其他商户数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{其他交易笔数}==null?new BigDecimal(0):$F{其他交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{其他交易金额}==null?new BigDecimal(0):$F{其他交易金额}]]></measureExpression>
+					</measure>
+					<measure name="终止协议案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{终止协议案例数}==null?new BigDecimal(0):$F{终止协议案例数}]]></measureExpression>
+					</measure>
+					<measure name="终止协议商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{终止协议商户数}==null?new BigDecimal(0):$F{终止协议商户数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{未处理案例案例数}==null?new BigDecimal(0):$F{未处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{未处理案例商户数}==null?new BigDecimal(0):$F{未处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{未处理案例交易笔数}==null?new BigDecimal(0):$F{未处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{未处理案例交易金额}==null?new BigDecimal(0):$F{未处理案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{已排除风险案例数}==null?new BigDecimal(0):$F{已排除风险案例数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{已排除风险商户数}==null?new BigDecimal(0):$F{已排除风险商户数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{已排除风险交易笔数}==null?new BigDecimal(0):$F{已排除风险交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{已排除风险交易金额}==null?new BigDecimal(0):$F{已排除风险交易金额}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例案例数}==null?new BigDecimal(0):$F{正在处理和已处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例商户数}==null?new BigDecimal(0):$F{正在处理和已处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易笔数}==null?new BigDecimal(0):$F{正在处理和已处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易金额}==null?new BigDecimal(0):$F{正在处理和已处理案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{疑似案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{疑似案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{疑似案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{疑似案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="小计案例数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{小计案例数}]]></measureExpression>
+					</measure>
+					<measure name="小计商户数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{小计商户数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易笔数_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{小计交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易金额_Nothing" class="java.math.BigDecimal">
+						<measureExpression><![CDATA[$F{小计交易金额}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="小计案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计案例数}]]></measureExpression>
+					</measure>
+					<measure name="小计商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计商户数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计交易金额}]]></measureExpression>
+					</measure>
+					<measure name="套现案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现案例数}]]></measureExpression>
+					</measure>
+					<measure name="套现商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现商户数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现交易金额}]]></measureExpression>
+					</measure>
+					<measure name="侧录案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录案例数}]]></measureExpression>
+					</measure>
+					<measure name="侧录商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录商户数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录交易金额}]]></measureExpression>
+					</measure>
+					<measure name="洗单案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单案例数}]]></measureExpression>
+					</measure>
+					<measure name="洗单商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单商户数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单交易金额}]]></measureExpression>
+					</measure>
+					<measure name="其他案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他案例数}]]></measureExpression>
+					</measure>
+					<measure name="其他商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他商户数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他交易金额}]]></measureExpression>
+					</measure>
+					<measure name="终止协议案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{终止协议案例数}]]></measureExpression>
+					</measure>
+					<measure name="终止协议商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{终止协议商户数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险案例数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险商户数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险交易金额}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例案例数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例商户数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易笔数_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易金额_count" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="疑似案例交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{疑似案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="小计案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计案例数}]]></measureExpression>
+					</measure>
+					<measure name="小计商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计商户数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="小计交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{小计交易金额}]]></measureExpression>
+					</measure>
+					<measure name="套现案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现案例数}]]></measureExpression>
+					</measure>
+					<measure name="套现商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现商户数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="套现交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{套现交易金额}]]></measureExpression>
+					</measure>
+					<measure name="侧录案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录案例数}]]></measureExpression>
+					</measure>
+					<measure name="侧录商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录商户数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="侧录交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{侧录交易金额}]]></measureExpression>
+					</measure>
+					<measure name="洗单案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单案例数}]]></measureExpression>
+					</measure>
+					<measure name="洗单商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单商户数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="洗单交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{洗单交易金额}]]></measureExpression>
+					</measure>
+					<measure name="其他案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他案例数}]]></measureExpression>
+					</measure>
+					<measure name="其他商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他商户数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="其他交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{其他交易金额}]]></measureExpression>
+					</measure>
+					<measure name="终止协议案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{终止协议案例数}]]></measureExpression>
+					</measure>
+					<measure name="终止协议商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{终止协议商户数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险案例数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险商户数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="已排除风险交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{已排除风险交易金额}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="未处理案例交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{未处理案例交易金额}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例案例数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例案例数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例商户数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例商户数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易笔数_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易笔数}]]></measureExpression>
+					</measure>
+					<measure name="正在处理和已处理案例交易金额_sum" class="java.math.BigDecimal" calculation="Sum">
+						<measureExpression><![CDATA[$F{正在处理和已处理案例交易金额}]]></measureExpression>
+					</measure>
+					<crosstabCell width="1130" height="30">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="240"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="265"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="290"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="315"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="360"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="385"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="410"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="435"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="505"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="530"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="555"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="600"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="625"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="650"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="675"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="720"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="745"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="890"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="915"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="940"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="965"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="770"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="795"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="820"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="845"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1010"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1035"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1060"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1085"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="25"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="50"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="75"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="120"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计案例数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="145"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计商户数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="170"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易笔数_Nothing}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易金额_Nothing}]]></textFieldExpression>
+				</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="30" columnTotalGroup="ALL">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="1130" height="30" rowTotalGroup="MCC">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="25"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="50"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="75"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="120"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="145"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="170"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="240"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="265"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="290"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="315"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="360"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="385"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="410"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="435"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="505"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="530"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="555"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="720"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="745"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="770"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="795"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="820"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="845"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="890"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="915"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="940"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="965"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1010"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1035"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1060"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1085"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易金额_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="600"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他案例数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="625"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他商户数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="650"
+						y="0"
+						width="25"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他交易笔数_count}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="675"
+						y="0"
+						width="45"
+						height="30"
+						key="textField-1"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他交易金额_count}]]></textFieldExpression>
+				</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="30" rowTotalGroup="MCC" columnTotalGroup="ALL">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="1130" height="30" rowTotalGroup="KIND">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="0"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="25"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="50"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="75"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{疑似案例交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="120"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="145"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="170"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="195"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{小计交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="240"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="265"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="290"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="315"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{套现交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="360"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="385"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="410"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="435"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{侧录交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="480"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="505"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单商户数_sum_KIND_ALL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="530"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="555"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{洗单交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="600"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="625"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="650"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他商户数_sum_ALL_ALL}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="675"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{其他交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="720"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="745"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{终止协议商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="770"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="795"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="820"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="845"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{已排除风险交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="890"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="915"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="940"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="965"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{未处理案例交易金额_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1010"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例案例数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1035"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例商户数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1060"
+						y="0"
+						width="25"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易笔数_sum}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="false" isBlankWhenNull="false" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						x="1085"
+						y="0"
+						width="45"
+						height="30"
+						key="textField"/>
+					<box topBorder="Thin" topBorderColor="#000000" leftBorder="Thin" leftBorderColor="#000000" rightBorder="Thin" rightBorderColor="#000000" bottomBorder="Thin" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="8"/>
+					</textElement>
+				<textFieldExpression   class="java.math.BigDecimal"><![CDATA[$V{正在处理和已处理案例交易金额_sum}]]></textFieldExpression>
+				</textField>
+						</cellContents>
+					</crosstabCell>
+					<crosstabCell width="0" height="30" rowTotalGroup="KIND" columnTotalGroup="ALL">
+						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+						</cellContents>
+					</crosstabCell>
+					<whenNoDataCell>						<cellContents mode="Transparent">
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="1Point" rightBorderColor="#000000" bottomBorder="1Point" bottomBorderColor="#000000"/>
+						</cellContents>
+					</whenNoDataCell>					</crosstab>
+			</band>
+		</summary>
+</jasperReport>

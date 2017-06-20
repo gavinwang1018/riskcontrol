@@ -1,0 +1,1085 @@
+<?xml version="1.0"?>
+<!DOCTYPE faces-config PUBLIC
+    "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN"
+    "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
+
+<faces-config>
+
+    <managed-bean>
+        <managed-bean-name>extSelectItems</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.webapp.action.ExtSelectItemUtil</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean> 	
+        
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_user_menu_right</from-outcome>
+			<to-view-id>/ext_right/ext_user_menu_right.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_user_action_right</from-outcome>
+			<to-view-id>/ext_right/ext_user_action_right.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_role_menu_right</from-outcome>
+			<to-view-id>/ext_right/ext_role_menu_right.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_role_action_right</from-outcome>
+			<to-view-id>/ext_right/ext_role_action_right.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_authority_menu_batch_set</from-outcome>
+			<to-view-id>/ext_right/ext_authority_menu_batch_set.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_authority_action_batch_set</from-outcome>
+			<to-view-id>/ext_right/ext_authority_action_batch_set.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+	<navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>ext_t_rule_instance/ext_t_rule_instance_list_edit_List</from-outcome>
+            <to-view-id>/ext_t_rule_instance/ext_t_rule_instance_list_edit_List.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>	
+    
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_view</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_view.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_list1</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_list1.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>   
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_t_riskcase/ext_t_riskcase_form_urgent_ViewForm</from-outcome>
+			<to-view-id>/ext_t_riskcase/ext_t_riskcase_form_urgent_ViewForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 		
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R01</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R01.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 
+
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R02</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R02.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 
+	
+			<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R03</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R03.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R04</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R04.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R05</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R05.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R06</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R06.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R07</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R07.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R08</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R08.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R09</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R09.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R10</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R10.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R11</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R11.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R12</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R12.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R13</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R13.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R14</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R14.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R15</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R15.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R16</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R16.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R17</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R17.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R18</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R18.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R19</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R19.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R20</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R20.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R21</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R21.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R22</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R22.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R23</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R23.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R24</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R24.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R25</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R25.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R26</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R26.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R27</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R27.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R28</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R28.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R29</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R29.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R30</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R30.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R31</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R31.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R32</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R32.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R33</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R33.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R34</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R34.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R35</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R35.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R36</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R36.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_EditForm_R37</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_EditForm_R37.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 						
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R01</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R01.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R02</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R02.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R03</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R03.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R04</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R04.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R05</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R05.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R06</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R06.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R07</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R07.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R08</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R08.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R09</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R09.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R10</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R10.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R11</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R11.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R12</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R12.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R13</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R13.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R14</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R14.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R15</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R15.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R16</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R16.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R17</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R17.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R18</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R18.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R19</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R19.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R20</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R20.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R21</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R21.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R22</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R22.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R23</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R23.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R24</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R24.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R25</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R25.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R26</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R26.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R27</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R27.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R28</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R28.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R29</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R29.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R30</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R30.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R31</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R31.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R32</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R32.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R33</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R33.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R34</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R34.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R35</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R35.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R36</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R36.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm_R37</from-outcome>
+				<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm_R37.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 						
+		
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>t_basearg/t_basearg_form_caseMer_EditForm</from-outcome>
+				<to-view-id>/t_basearg/t_basearg_form_caseMer_EditForm.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 	
+			
+		<navigation-rule>
+			<from-view-id>/*</from-view-id>
+			<navigation-case>
+				<from-outcome>t_basearg/t_basearg_list_caseMer_List</from-outcome>
+				<to-view-id>/t_basearg/t_basearg_list_caseMer_List.jsp</to-view-id>
+			</navigation-case>
+		</navigation-rule> 	
+						
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_instance/ext_t_rule_instance_ViewForm</from-outcome>
+			<to-view-id>/ext_rule_instance/ext_t_rule_instance_ViewForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>  
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_group/ext_t_rule_group_ViewForm</from-outcome>
+			<to-view-id>/ext_rule_group/ext_t_rule_group_ViewForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>  
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_rule_group/ext_t_rule_group_EditForm</from-outcome>
+			<to-view-id>/ext_rule_group/ext_t_rule_group_EditForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>  
+		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_role_set</from-outcome>
+			<to-view-id>/ext_right/ext_role_set.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 	 
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_right/ext_org_set</from-outcome>
+			<to-view-id>/ext_right/ext_org_set.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 	 
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_t_riskcase/ext_t_riskcase_urgent</from-outcome>
+			<to-view-id>/ext_t_riskcase/ext_t_riskcase_urgent.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+ 		
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_t_riskcase/ext_t_riskcase_sendToInst</from-outcome>
+			<to-view-id>/ext_t_riskcase/ext_t_riskcase_sendToInst.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 	
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_t_riskcase/ext_t_riskcase_back</from-outcome>
+			<to-view-id>/ext_t_riskcase/ext_t_riskcase_back.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 		
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>ext_t_riskcase/ext_t_riskcase_form_ViewForm</from-outcome>
+			<to-view-id>/ext_t_riskcase/ext_t_riskcase_form_ViewForm.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 		
+	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>t_report/t_report_query</from-outcome>
+			<to-view-id>/t_report/t_report_query.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule> 		
+		
+	 	
+	<navigation-rule>
+		<from-view-id>/*</from-view-id>
+		<navigation-case>
+			<from-outcome>t_keo_mchnt_import</from-outcome>
+			<to-view-id>/t_keo_mchnt/t_keo_mchnt_import.jsp</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<managed-bean>
+		<managed-bean-name>reportList</managed-bean-name>
+		<managed-bean-class>cn.com.brilliance.begen.webapp.action.ReportList</managed-bean-class>
+		<managed-bean-scope>request</managed-bean-scope>
+		<managed-property>
+			<property-name>queryFields</property-name>
+			<map-entries>
+				<key-class>java.lang.String</key-class>
+				<map-entry>
+					<key>belongToInst</key>
+					<value>#{param.belongToInst}</value>
+				</map-entry>
+				<map-entry>
+					<key>beginDate</key>
+					<value>#{param.beginDate}</value>
+				</map-entry>
+				<map-entry>
+					<key>endDate</key>
+					<value>#{param.endDate}</value>
+				</map-entry>
+			</map-entries>
+		</managed-property>
+	</managed-bean>
+		
+	<managed-bean>
+        <managed-bean-name>extTruleInstanceMccList</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.webapp.action.ExtTruleInstanceMccList</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>queryFields</property-name>
+			<map-entries>
+				<key-class>java.lang.String</key-class>
+				<map-entry>
+					<key>_hsql</key>
+					<value>#{param._hsql}</value>
+				</map-entry>
+				<map-entry>
+					<key>id</key>
+					<value>#{param.id}</value>
+				</map-entry>
+				<map-entry>
+					<key>id_like</key>
+					<value>#{param.id_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>id_min</key>
+					<value>#{param.id_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>id_max</key>
+					<value>#{param.id_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>ruleInstanceId</key>
+					<value>#{param.rule_instance_id}</value>
+				</map-entry>
+				<map-entry>
+					<key>ruleInstanceId_like</key>
+					<value>#{param.rule_instance_id_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>ruleInstanceId_min</key>
+					<value>#{param.rule_instance_id_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>ruleInstanceId_max</key>
+					<value>#{param.rule_instance_id_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>param1</key>
+					<value>#{param.param_1}</value>
+				</map-entry>
+				<map-entry>
+					<key>param1_like</key>
+					<value>#{param.param_1_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>param1_min</key>
+					<value>#{param.param_1_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>param1_max</key>
+					<value>#{param.param_1_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>param2</key>
+					<value>#{param.param_2}</value>
+				</map-entry>
+				<map-entry>
+					<key>param2_like</key>
+					<value>#{param.param_2_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>param2_min</key>
+					<value>#{param.param_2_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>param2_max</key>
+					<value>#{param.param_2_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>param3</key>
+					<value>#{param.param_3}</value>
+				</map-entry>
+				<map-entry>
+					<key>param3_like</key>
+					<value>#{param.param_3_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>param3_min</key>
+					<value>#{param.param_3_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>param3_max</key>
+					<value>#{param.param_3_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>param4</key>
+					<value>#{param.param_4}</value>
+				</map-entry>
+				<map-entry>
+					<key>param4_like</key>
+					<value>#{param.param_4_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>param4_min</key>
+					<value>#{param.param_4_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>param4_max</key>
+					<value>#{param.param_4_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccCode</key>
+					<value>#{param.mcc_code}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccCode_like</key>
+					<value>#{param.mcc_code_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccCode_min</key>
+					<value>#{param.mcc_code_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccCode_max</key>
+					<value>#{param.mcc_code_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>riskThreshold</key>
+					<value>#{param.risk_threshold}</value>
+				</map-entry>
+				<map-entry>
+					<key>riskThreshold_like</key>
+					<value>#{param.risk_threshold_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>riskThreshold_min</key>
+					<value>#{param.risk_threshold_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>riskThreshold_max</key>
+					<value>#{param.risk_threshold_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>bigmccCode</key>
+					<value>#{param.bigmcc_code}</value>
+				</map-entry>
+				<map-entry>
+					<key>bigmccCode_like</key>
+					<value>#{param.bigmcc_code_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>bigmccCode_min</key>
+					<value>#{param.bigmcc_code_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>bigmccCode_max</key>
+					<value>#{param.bigmcc_code_max}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccId</key>
+					<value>#{param.mcc_id}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccId_like</key>
+					<value>#{param.mcc_id_like}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccId_min</key>
+					<value>#{param.mcc_id_min}</value>
+				</map-entry>
+				<map-entry>
+					<key>mccId_max</key>
+					<value>#{param.mcc_id_max}</value>
+				</map-entry>
+			</map-entries>
+        </managed-property>
+
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>extTruleInstanceMccForm</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.webapp.action.ExtTruleInstanceMccForm</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>extTruleInstanceMcc</property-name>
+            <value>#{extTruleInstanceMcc}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>truleInstanceMccPrimaryKey</property-name>
+            <value>#{param._key}</value>
+        </managed-property>
+    </managed-bean>
+  
+      <managed-bean>
+        <managed-bean-name>extTruleInstanceMcc</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.model.ExtTruleInstanceMcc</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>id</property-name>
+            <value>#{param.id}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>ruleInstanceId</property-name>
+            <value>#{param.rule_instance_id}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>param1</property-name>
+            <value>#{param.param_1}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>param2</property-name>
+            <value>#{param.param_2}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>param3</property-name>
+            <value>#{param.param_3}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>param4</property-name>
+            <value>#{param.param_4}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>mccCode</property-name>
+            <value>#{param.mcc_code}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>riskThreshold</property-name>
+            <value>#{param.risk_threshold}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>bigmccCode</property-name>
+            <value>#{param.bigmcc_code}</value>
+        </managed-property>
+        <managed-property>
+            <property-name>mccId</property-name>
+            <value>#{param.mcc_id}</value>
+        </managed-property>
+    </managed-bean> 
+    
+    <managed-bean>
+        <managed-bean-name>extTriskcaseForm</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.webapp.action.ExtTriskcaseForm</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>url</property-name>
+            <value>#{param.url}</value>
+        </managed-property> 
+        <managed-property>
+            <property-name>flag</property-name>
+            <value>#{param.flag}</value>
+        </managed-property>     
+        <managed-property>
+            <property-name>successUrl</property-name>
+            <value>#{param.successUrl}</value>
+        </managed-property>                      
+    </managed-bean>    
+    
+	 <navigation-rule>
+        <from-view-id>/*</from-view-id>
+        <navigation-case>
+            <from-outcome>t_keo_mchnt/t_keo_mchnt_form_reasonedit_EditForm</from-outcome>
+            <to-view-id>/t_keo_mchnt/t_keo_mchnt_form_reasonedit_EditForm.jsp</to-view-id>
+        </navigation-case>
+    </navigation-rule>      
+    <managed-bean>
+        <managed-bean-name>keoMchntImport</managed-bean-name>
+        <managed-bean-class>cn.com.brilliance.begen.webapp.action.KeoMchntImport</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+       
+    </managed-bean>
+</faces-config>

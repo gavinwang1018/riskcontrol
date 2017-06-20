@@ -1,0 +1,61 @@
+textarea,.bginput
+{
+	font: 12px Microsoft Yahei,Tahoma, Verdana;
+}
+.fieldset {
+margin-bottom: 6px;
+width:80%;
+font-size: 12px; }
+
+.smallfont
+{
+	color: #444;
+	font: 12px Microsoft Yahei,Tahoma, Verdana;
+}
+.tborder
+{
+	background: #FFF;
+	color: #000;
+	border: 1px solid #CCC;
+}
+.tcat
+{
+	background: #DDE1EA;
+	color: #000;
+	font: bold 12px Microsoft Yahei,Tahoma, Verdana;
+}
+a:link, body_alink
+{
+	color: #000;
+	text-decoration: none;
+}
+a:visited, body_avisited
+{
+	color: #333;
+	text-decoration: none;
+}
+a:hover, a:active, body_ahover
+{
+	color: #FF4400;
+}
+.panelsurround
+{
+	background: #E4E4E6;
+	color: #000000;
+}
+.panel
+{
+	background: #EBEBEB;
+	color: #000000;
+	padding: 10px;
+	border: 2px outset;
+}
+.button {
+	background-color:#FFFFFF;
+    color: #6379AC;
+    border: 1px solid #336699;
+    padding:0 2px 0 2px;
+    margin:2px;
+    font-size:12px;
+    cursor:hand;
+}

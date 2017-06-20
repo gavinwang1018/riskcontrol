@@ -1,0 +1,91 @@
+body{margin: 0;}
+form{margin:0;padding:0;}
+#mainBody{
+	margin:0;
+	position: absolute;/*--绝对定位--*/
+	top: 50%;
+	left: 50%;
+	margin-top: -200px;/*--div高度的一半--*/
+	margin-left: -400px;/*--div宽度的一半--*/
+	width:800px;
+	height:400px;
+	background:url(../images/login_bg.jpg) no-repeat;
+}
+#loginLeft{
+	float:left;
+	width:430px;
+	height:400px;
+	padding:20px 20px 0;
+}
+#loginRight{
+	width:250px;
+	height:400px;
+	padding:30px 20px 0;
+}
+#loginForm{
+	padding:60px 0 0 0;
+}
+#loginForm ul{
+	margin:0;
+	padding:0;
+	list-style:none;
+	font-size:12px;
+}
+#loginForm ul li{
+	height:40px;
+}
+#loginForm ul li .form_item{
+	color:#666;
+	font-size:13px;
+	font-weight:bold;
+}
+#loginForm ul li .form_text{
+	color:black;
+	padding:0 3px;
+	border:1px solid #999;
+	width:180px;
+	height:20px;
+	line-height:20px;
+	font-size:12px;
+}
+.li_checkbox{
+padding:0 0 0 40px;
+line-height:14px;
+}
+.btn_submit{
+	width:129px;
+	height:31px;
+	background:url(../images/login_btn.jpg) no-repeat;
+	display:block;
+	text-align:center;
+	line-height:31px;
+	font-weight:bold;
+	font-size:14px;
+	
+}
+#loginForm ul li.btn_login{
+	text-align:center;
+	border-top:1px dashed #ccc;
+	padding-top:20px;
+}
+#loginForm ul li.btn_login a{
+	color:#0066cc;
+	font-size:14px;
+}
+#loginForm ul li.btn_login a:hover{
+	color:gray;
+	font-size:14px;
+}
+.form_item_id{
+	color:#aaa;
+	font-size:12px;
+	font-weight:none;
+}
+.form_title{
+	border-top:1px dashed #ccc;
+	padding-bottom:25px;
+}
+.errorInfo{
+color:red;
+font-size:12px;
+}

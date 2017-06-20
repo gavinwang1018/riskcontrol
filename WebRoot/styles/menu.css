@@ -1,0 +1,337 @@
+body {
+	margin: 0;
+	font-size:12px;
+}
+/*================================上菜单页面所有样式====================================*/
+
+#menuoption{
+	cursor:hand;
+	font-size:10px;
+}
+
+#title_body {
+	height: 58px; 
+	margin: 0;
+	background:url(../images/headerbg.gif) repeat-x bottom left;
+	color: #808080;
+	text-align:right;
+}
+
+#companylogo{
+	width: 300px;
+	height: 50px;
+	float: left;
+	text-align:left;
+}
+#title {
+	width: 660px;
+	height: 48px;
+	float: right;
+	background-repeat: no-repeat;
+	background-position-x: left;
+	background-position-y: top;
+	margin-left:20px;
+}
+
+#userInfo {
+	font-size:12px;
+	color:#808080;
+}
+
+.infoClass{
+	margin-top:2px;
+	width: 400px;
+	float:right;
+	font-size:12px;
+	color:#808080;
+	vertical-align:top;
+	padding-top:5px;
+	clear:none;
+	text-align:right;
+}
+.infoClass a
+{
+	text-decoration: none;
+}
+
+.infoClass a:visited {
+	color:#808080;
+	text-decoration: none;
+}
+
+.infoClass a:hover {
+	color:#808080;
+	text-decoration: underline;
+}
+
+#top_select {
+	margin-left:5px;
+	padding-top:2px;
+	padding-right:5px;
+	float: right;
+}
+
+#top_menu {
+	bottom:0px;
+	background:url(../images/hmrightbg.gif) repeat-x;
+	color: #626262;
+	float: left;
+	width: 100%;
+}
+
+#top_menu a {	
+	padding: 3px 3px 7px 8px;
+	color: #626262;
+	height:18px;
+	background: inherit;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+#top_menu a:hover {
+	background: #9DBFE0;
+	color: #FFFFFF;
+}
+
+.aClass{
+	background: #9DBFE0 url(hmleftbg.gif) repeat-x;
+	color:#FFFFFF;
+}
+
+/*上菜单更新部分*/
+
+.webfx-menu, .webfx-menu * {
+	/*
+	Set the box sizing to content box
+	in the future when IE6 supports box-sizing
+	there will be an issue to fix the sizes
+
+	There is probably an issue with IE5 mac now
+	because IE5 uses content-box but the script
+	assumes all versions of IE uses border-box.
+
+	At the time of this writing mozilla did not support
+	box-sizing for absolute positioned element.
+
+	Opera only supports content-box
+	*/
+	box-sizing:			content-box;
+	-moz-box-sizing:	content-box;
+}
+
+.webfx-menu {
+	position:			absolute;
+	z-index:			100;
+	visibility:			hidden;
+	white-space :nowrap ;
+	width:100%;
+	border:				1px solid black;
+	padding:			1px;
+	background:			white;
+	filter:				progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=4)
+						alpha(Opacity=90);
+	-moz-opacity:		0.9;
+}
+
+.webfx-menu-empty {
+	display:			block;
+	border:				1px solid white;	padding:			2px 3px 2px 5px;
+	font-size:			11px;
+	font-family:		Tahoma, Verdan, Helvetica, Sans-Serfif;
+	color:				black;
+}
+
+.webfx-menu a {
+	display:			block;
+	width:				expression(constExpression(ieBox ? "100%": "auto"));	/* should be ignored by mz and op */	height:				expression(constExpression("1px"));
+	overflow:			visible;		padding:			2px 3px 2px 5px;
+			font-size:			11px;
+	font-family:		Tahoma, Verdan, Helvetica, Sans-Serfif;
+	text-decoration:	none;
+	vertical-align:		center;
+		color:				black;
+	border:				1px solid white;}	
+
+.webfx-menu a:visited,
+.webfx-menu a:visited:hover {
+	color:	black;
+}
+
+.webfx-menu a:hover {
+	color:			black;
+}	
+
+.webfx-menu a .arrow {
+	float:			right;
+	border:			0;
+	width:			3px;
+	margin-right:	3px;	margin-top:		4px;}
+
+/* separtor */
+.webfx-menu div {
+	height:			0;
+	height:			expression(constExpression(ieBox ? "2px" : "0"));
+	border-top:		1px solid #cccccc;
+	overflow:		hidden;
+	margin:			2px 0px 2px 0px;
+	font-size:		0mm;
+	width:80%;
+	align:center;
+	margin-left:8px;
+	margin-right:8px;
+}
+
+/*主菜单样式*/
+.webfx-menu-bar {
+
+	padding:		2px;
+	
+	font-family:	Verdana, Helvetica, Sans-Serif;
+	font-size:		12px;
+	
+	/* IE5.0 has the wierdest box model for inline elements */
+	padding:		expression(constExpression(ie50 ? "0px" : "2px"));
+}
+
+.webfx-menu-bar a,
+.webfx-menu-bar a:visited {
+
+	padding:			1px 3px 1px 5px;		color:				black;
+	text-decoration:	none;
+
+	/* IE5.0 Does not paint borders and padding on inline elements without a height/width */
+	height:		expression(constExpression(ie50 ? "17px" : "auto"));
+}
+
+.webfx-menu-bar a:hover {
+	color:			black;
+	background:		rgb(120,172,255);	
+}
+
+.webfx-menu-bar a .arrow {
+	border:			0;
+	float:			none;
+}
+
+.webfx-menu-bar a:active, .webfx-menu-bar a:focus {
+	-moz-outline:	none;
+	outline:		none;
+	/*
+		ie does not support outline but ie55 can hide the outline using
+		a proprietary property on HTMLElement. Did I say that IE sucks at CSS?
+	*/	ie-dummy:		expression(this.hideFocus=true);
+	/*
+	border-left:	1px solid rgb(0,66,174);
+	border-right:	1px solid rgb(234,242,255);
+	border-top:		1px solid rgb(0,66,174);
+	border-bottom:	1px solid rgb(234,242,255);
+	*/
+	}
+
+
+/*================================左菜单页面所有样式====================================*/
+
+.leftbody{
+	background:url(../images/leftback.gif) repeat-x bottom;
+}
+/*功能菜单项上的图片域样式*/
+#head_style {
+	height:140px;
+	background: url(../images/ad.gif) no-repeat center;
+	width: 160px;
+}
+
+/*功能菜单项上题头样式*/
+#head_title {
+	text-align:center;
+	width: 160px;
+	font-size: 12px;
+	font-weight: bold;
+	padding:0 4px 4px 4px;
+	margin-bottom:4px;
+}
+
+#left_menu {
+	width: 160px;
+	margin-top: 5px;
+	font-size:12px;
+}
+
+#left_menu div {
+	display: block;
+	font-weight:bold;
+	font-size:12px;
+	height:28px;
+	width:100%;
+}
+.textstyle{
+	padding: 5px 8px 5px 8px;
+	color: #336699;
+	font-weight: bold;
+	text-decoration: none;
+	width:135px;
+}
+
+#left_menu div a{
+	padding: 5px 8px 5px 8px;
+	color: #336699;
+	font-weight: bold;
+	text-decoration: none;
+	width:135px;
+}
+
+#left_menu div a:hover{
+	/*background: #A9C0CE;*/
+
+	color: #944D36;
+}
+
+.displayYes{
+	height:25px;
+	background: url(../images/1.gif) no-repeat center middle;
+	width:16px;
+	vertical-align: top;
+}
+
+.displayNo{
+	height:25px;
+	background: url(../images/2.gif) no-repeat center middle;
+	width:16px;
+	vertical-align: top;
+}
+#beforemenu font{
+FONT-SIZE: 10pt;
+FONT-FAMILY: Webdings;
+}
+
+#behindmenu font{
+FONT-SIZE: 10pt;
+FONT-FAMILY: Webdings;
+}
+
+#left_menu ul {
+	padding:0;
+	margin:0;
+}
+
+#left_menu li {
+	list-style-type: none;
+	background: url(../images/point2.gif) no-repeat left top;
+	padding-left:25px;
+	margin:6px 0 6px 0;
+	text-decoration: none;
+	font-weight:lighter;
+}
+
+#left_menu ul  li a:link,#left_menu ul  li a:visited {
+	text-decoration: none;
+	color: #003366;
+}
+
+#left_menu ul li a:hover,#left_menu ul li a:active {
+	text-decoration: underline;
+}
+#left_menu div{
+		border-top: 1px dashed #336699;
+}
+

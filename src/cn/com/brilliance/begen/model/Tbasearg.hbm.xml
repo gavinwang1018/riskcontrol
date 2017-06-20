@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.Tbasearg"
+        table="t_basearg"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="name"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="name"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="type"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="type"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="code"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="code"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="param1"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="param1"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="param2"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="param2"
+            length="20"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>

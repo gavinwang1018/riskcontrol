@@ -1,0 +1,127 @@
+/*-----------Layout--------------*/
+body{
+margin-top: 2px;
+margin-left: 4px;
+}
+#main_body{
+	width:100%;
+}
+
+/*-------------Common--------------------------*/
+.clearfloat
+{float:none
+clear:both;}
+.input_receiver{
+width:97%;
+border:1px solid #B5B8C8;
+height:24px;
+line-height:22px;	
+}
+.input_single{
+width:100%;
+border:1px solid #B5B8C8;
+height:24px;
+line-height:22px;	
+}
+
+.input_multi{
+	width:100%;
+	}
+.input_select_list{
+	border:1px solid #ececec;
+	width:230px;
+	height:350px;
+}
+/*-------------Message Menu---------------------*/
+#menu_list{
+	margin: 0px auto;
+	padding: 0px;
+}
+#menu_list li {
+	float:left;
+	margin:5px;
+	text-align:center;
+	}
+a.message_link{
+	font-size:12px;
+	text-decoration:none;
+	color:black;
+}
+a.message_link:hover{
+	font-size:12px;
+	text-decoration:underline;
+	color:#3366FF;
+}
+/*---------Message Title----------*/
+#message_title{
+	width:100%;
+	margin:0 0 10px 0;
+	border-top:2px solid #7ABEFF;
+	background:#BDDBFF;
+	border-bottom:1px solid #7ABEFF;
+}
+.message_title_tip{
+	font-size:14px;
+	color:#003399;
+	font-weight:bold;
+}
+/*---------Message Content---------*/
+.message_new_content{
+	padding:5px;
+	font-size:12px;
+}
+.message_new_content_inputarea{
+	padding:5px;
+}
+.message_new_table{
+	width:100%;
+	border-left:10px solid #DDDDDD;}
+.message_new_table_outline{
+	width:100%;
+	border-top:2px solid #7ABEFF;
+}
+.message_list_table{
+	font-size:12px;
+	color:black;
+	width:100%;
+	border-top:1px solid #7ABEFF;
+	border-bottom:1px solid #7ABEFF;
+}
+.msg_content_title{
+	font-size:13px;
+	color:black;
+	font-weight:bold;
+	line-height:150%;
+	width:650px;
+	}
+
+.msg_content_sender{
+	font-size:12px;
+	color:#00681C;
+	font-weight:bold;
+	line-height:150%;
+	width:650px;
+	}
+.msg_content_time{
+	font-size:12px;
+	color:black;
+	line-height:150%;
+	width:650px;
+	}
+.msg_content_detail{
+	font-size:12px;
+	line-height:150%;
+	word-break:break-all;
+	word-wrap:break-word;
+	width:660px;
+	overflow:hidden;
+	}
+.select_name{
+	font-size:14px;
+	font-weight:bold;
+	color:blue;
+}
+.space_img{
+	width:17px;
+	height:23px;
+}

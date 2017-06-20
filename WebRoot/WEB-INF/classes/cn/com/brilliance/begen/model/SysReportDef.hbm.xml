@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysReportDef"
+        table="sys_report_def"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="reportName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[report_name]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="dataObject"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[data_object]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="reportTitle"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[report_title]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="reportType"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[report_type]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="chartTitle"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[chart_title]"
+            length="100"
+            unique="false"
+        />
+        <property
+            name="chartSeries"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[chart_series]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="category"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[category]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="exportFormat"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[export_format]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="chartType"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[chart_type]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="dataValue"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[data_value]"
+            length="250"
+            unique="false"
+        />
+ <!-- Imported bi-directional one-to-many association to SysReportQueryDef -->
+	<set name="sysReportQueryDefGroup"
+	     table="sys_report_query_def"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="sys_report_def"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysReportQueryDef"
+		/>
+	</set>     
+ <!-- Imported bi-directional one-to-many association to SysReportGroupDef -->
+	<set name="sysReportGroupDefGroup"
+	     table="sys_report_group_def"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="sys_report_def"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysReportGroupDef"
+		/>
+	</set>     
+ <!-- Imported bi-directional one-to-many association to SysReportFieldDef -->
+	<set name="sysReportFieldDefGroup"
+	     table="sys_report_field_def"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	     order-by="sys_record_order asc"
+	>
+		<key>
+			<column name="sys_report_def"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysReportFieldDef"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="data_object"
+			name="dataObjectOfSysDataObject"
+			class="cn.com.brilliance.begen.model.SysDataObject"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

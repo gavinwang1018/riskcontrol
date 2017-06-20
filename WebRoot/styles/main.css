@@ -1,0 +1,310 @@
+html{
+overflow:hidden;
+}
+body {
+	margin: 0px;
+	padding: 0px;
+	font-size:12px;
+	font-family:ËÎÌו;
+	background-image: url(../images/main_bg1.jpg);
+}
+form {
+	margin: 0px;
+	padding: 0px;
+}
+#top1 {
+	background-image: url(../images/tabbar_level1_bk.gif);
+	width: 100%;
+	height: 35px;
+}
+#nav1 {
+	background-image: url(../images/tabbar_level1_bk.gif);
+	float: left;
+}
+#logo {
+	background-image: url(../images/tabbar_level1_bk.gif);
+	height: 35px;
+	width: 100px;
+	float: left;
+}
+ul.TabBarLevel1{
+	list-style:none;
+	margin:0;
+	padding:0;
+	height:35px;
+	background-image:url(../images/tabbar_level1_bk.gif);
+	float: left;
+}
+ul.TabBarLevel1 li{
+	float:left;
+	padding:0;
+	height:35px;
+	margin-right:1px;
+	background:url(../images/tabbar_level1_slice_left_bk.gif) left top no-repeat;
+}
+ul.TabBarLevel1 li a{
+	display:block;
+	line-height:35px;
+	padding:0 10px;
+	color:#000000;
+	text-decoration:none;
+	background:url(../images/tabbar_level1_slice_right_bk.gif) right top no-repeat;
+	white-space: nowrap;
+}
+ul.TabBarLevel1 li.Selected{
+	background:url(../images/tabbar_level1_slice_selected_left_bk.gif) left top no-repeat;
+}
+ul.TabBarLevel1 li.Selected a{
+	background:url(../images/tabbar_level1_slice_selected_right_bk.gif) right top no-repeat;
+}
+ul.TabBarLevel1 li a:link,ul.TabBarLevel1 li a:visited{
+	color:#000000;
+	text-decoration:none;
+}
+ul.TabBarLevel1 li a:hover,ul.TabBarLevel1 li a:active{
+	color:#000000;
+	text-decoration:none;
+}
+ul.TabBarLevel1 li.Selected a:link,ul.TabBarLevel1 li.Selected a:visited{
+	color:#000;
+	text-decoration:none;
+}
+ul.TabBarLevel1 li.Selected a:hover,ul.TabBarLevel1 li.Selected a:active{
+	color:#000000;
+	text-decoration:none;
+}
+#top1 #nav1 .TabBarLevel1 img {
+	margin-right: 6px;
+	margin-top: 7px;
+	float: left;
+	border: 0px;
+}
+#top_right {
+	background-image: url(../images/tabbar_level1_bk.gif);
+	width: 180px;
+	float: right;
+	height: 35px;
+}
+#top1 #top_right ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+}
+#top1 #top_right li {
+	float: right;
+	margin-right: 10px;
+	height: 35px;
+	line-height: 35px;
+}
+#top1 #top_right a {
+	display:block;
+	line-height:35px;
+	color:#000000;
+	text-decoration:none;
+	white-space: nowrap;
+}
+#top1 #top_right img {
+	margin-right: 2px;
+	margin-top: 8px;
+	border: 0px;
+}
+#top_menu {
+	background-image: url(../images/menu-bg.gif);
+	height: 30px;
+	text-align: left;
+}
+#main {
+	background-color: #CAE2FA;
+}
+#main #main_left {
+	background-color: #E6F1FD;
+	width: 200px;
+	height:500px;
+	float:left;}
+#main #main_right {
+	background-color: #FFFFFF;
+	height:470px;
+	margin-left: 200px;
+	margin-right: auto;
+	border: 1px solid #888AB9;
+}
+.newline {
+	clear: both;
+}
+#bottom {
+	height: 25px;
+	background-image: url(../images/bottom-bg.gif);
+}
+
+#bottom #showLeftMenu {
+	float: left;
+	line-height: 25px;
+	cursor: hand;
+}
+#bottom #showLeftMenuimg {
+	float: left;
+	margin-top: 5px;
+	margin-right: 5px;
+}
+a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #0066FF;
+	text-decoration: none;
+}
+#top1 #top_title {
+	float: left;
+	width: 150px;
+	height: 35px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 16px;
+	line-height: 35px;
+	font-weight: bold;
+	color: #006699;
+}
+/*container*/
+#main #main_left #container {
+	background:white;
+	color: #000;
+	margin: 0px;
+	padding: 0px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	font-weight: normal;
+	text-align:left;
+}
+
+#main #main_left #container .title a:link {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+#main #main_left #container .title  a:visited {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #000000;
+	text-decoration: none;
+}
+#main #main_left #container .title a:hover {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #0066FF;
+	text-decoration: none;
+}
+#main #main_left #container {
+	width: 198px;
+	font-weight: normal;
+}
+#main #main_left #container H1 {
+	font-size: 12px;
+	margin: 0px;
+	padding:0;
+	width: 198px;
+	cursor: pointer;
+	height: 29px;
+	font-weight: normal;
+	vertical-align: middle;
+}
+#main #main_left #container .title  a {
+	font-weight: normal;
+	display: block;
+	padding-top: 1px;
+	padding-right: 8px;
+	padding-bottom: 0px;
+	padding-left: 8px;
+	width: 182px;
+	color: #000;
+	height: 29px;
+	line-height:29px;
+	text-decoration: none;
+	moz-outline-style: none;
+	background-image: url(../images/title.gif);
+	background-repeat: repeat-x;
+	margin:0;
+}
+#main #main_left #container .content {
+	padding:0 0 0 8px;
+}
+#main #main_left #container .content #space {
+	height: 12px;
+	width: 10px;
+}
+#container .title img {
+	margin-right: 8px;
+	margin-left: 12px;
+}
+#main #main_left #container .title img {
+}
+
+#loading {
+	height:100px;
+	width:290px;
+	background-image: url(../images/div_loading_bg.gif);
+	background-repeat: no-repeat;
+	background-position: left top;
+}	
+						
+.bgDiv{
+	background:white;
+	filter:	progid:DXImageTransform.Microsoft.Shadow(color="#777777", Direction=135, Strength=4)
+					alpha(Opacity=60);
+	-moz-opacity:		0.6;
+	z-index:			111;
+	position:absolute;
+	left:0px;
+	top:0px;
+}
+.button{
+	height:25px;
+	width:80px;
+	font-family: "ËÎÌו";
+	background-image:  url(../images/Btn_bg.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	font-size: 12px;
+	color:#000000;
+	padding:3px 2px 0 2px;
+	cursor:pointer;
+	font-weight:normal;
+	display:inline;
+	text-decoration: none;
+	border-top: 1px solid #CCCCCC;
+	border-right:1px solid #CCCCCC;
+	border-bottom: 1px solid #CCCCCC;
+	border-left: 1px solid #CCCCCC;
+	background: #FFF;
+	margin:3px 5px;
+}
+#tasklistbar {
+	height: 29px;
+	background-image: url(../images/title.gif);
+	background-repeat: repeat-x;
+	line-height: 29px;
+	text-align:left;
+	padding-left:10px;
+}
+#tasklistbar #tasklist {
+	float: left;
+	width:700px;
+}
+
+#tasklistbar #tasklist a {
+	line-height:29px;
+	padding:0 1px;
+	color: #999999;
+	text-decoration:none;
+	white-space: nowrap;
+}

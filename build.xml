@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="be-gen" default="" basedir=".">		
+	<property name ="app.dir" value="D:/jakarta-tomcat-5.0.28/webapps/riskControl"></property>
+	<target name="native2ascii-application-resources" description="对运行项目中的资源文件进行码制转换">
+		<echo level="info">资源文件从GBK码制转换成UNICODE码制</echo>
+		<native2ascii src="${basedir}/Resources" dest="${basedir}/src" includes="Resource_*.properties" encoding="GBK" />
+	</target>
+	<target name="copy_ext_web">
+		<copy todir="${app.dir}" overwrite="true">
+			<fileset dir="${basedir}/ext-WebRoot" includes="**/*"></fileset>
+		</copy>
+	</target>
+</project>

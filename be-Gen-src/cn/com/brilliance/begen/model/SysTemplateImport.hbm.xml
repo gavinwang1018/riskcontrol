@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysTemplateImport"
+        table="sys_template_import"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="importDate"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="[import_date]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="templateId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[template_id]"
+            length="4"
+            unique="false"
+        />
+ <!-- Imported bi-directional one-to-many association to SysTemplateLog -->
+	<set name="sysTemplateLogGroup"
+	     table="sys_template_log"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	>
+		<key>
+			<column name="template_import_id"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysTemplateLog"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="template_id"
+			name="templateIdOfSysTemplate"
+			class="cn.com.brilliance.begen.model.SysTemplate"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

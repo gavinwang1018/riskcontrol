@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.TriskprocessTimelimit"
+        table="t_riskprocess_timelimit"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="native" />
+        </id>
+        <property
+            name="belongToInst"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="belong_to_inst"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="warnLevel"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="warn_level"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="timeLimit"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="time_limit"
+            length="40"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="belong_to_inst"
+			name="belongToInstOfTorganizeInfo"
+			class="cn.com.brilliance.begen.model.TorganizeInfo"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		
+		<many-to-one
+			column="warn_level"
+			name="wevel"
+			class="cn.com.brilliance.begen.model.TriskprocessTimelimit"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+    
+    
+</hibernate-mapping>

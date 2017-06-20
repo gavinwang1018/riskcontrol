@@ -1,0 +1,21 @@
+.portal_table{
+	padding:3px;
+}
+
+.portal_row{
+	padding-top:6px;
+	padding-left:3px;
+	padding-right:3px;
+	padding-bottom:6px;
+}
+
+.portal_inner_table{
+	border:1px solid #333333;
+	width:100%;
+}
+
+.portal_inner_title{
+	background-color:#F1F0F0;
+	color:#000000;
+	font-size:13px;
+}

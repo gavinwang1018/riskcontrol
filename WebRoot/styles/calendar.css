@@ -1,0 +1,141 @@
+/* This class is related to the popup javascript calendar for date selection */
+
+div.calDiv {
+    background-color: #ffffff;
+    color: #000000;
+    color: #000000;
+    padding: 0px;
+    position: absolute;
+    visibility: hidden;
+    z-index: 11000;
+}
+
+div.calDiv a {
+    background-color: transparent;
+    color: #000000;
+    font-weight: normal;
+}
+
+div.calDiv a.cpOtherMonthDate {
+    background: transparent;
+    color: #808080;
+}
+
+div.calDiv a:visited {
+    background-color: transparent;
+    color: #000000;
+}
+
+div.calDiv a:hover {
+    background: transparent;
+    color: #0000ff;
+    text-decoration: underline overline;
+}
+
+img.calIcon {
+    margin-top: 2px;
+    vertical-align: top !important;
+}
+
+
+/* Classes for DIV-style calendar. If you wish to rename prefix (calendar-)
+   of this classes, remember to replace it in all pages where calendar is used
+   (setCSSPrefix() method)  */
+
+	.calendar-cpYearNavigation,
+	.calendar-cpMonthNavigation
+			{
+			background-color:#6677DD;
+			text-align:center;
+			vertical-align:center;
+			text-decoration:none;
+			color:#FFFFFF;
+			font-weight:bold;
+			}
+	.calendar-cpDayColumnHeader,
+	.calendar-cpYearNavigation,
+	.calendar-cpMonthNavigation,
+	.calendar-cpCurrentMonthDate,
+	.calendar-cpCurrentMonthDateDisabled,
+	.calendar-cpOtherMonthDate,
+	.calendar-cpOtherMonthDateDisabled,
+	.calendar-cpCurrentDate,
+	.calendar-cpCurrentDateDisabled,
+	.calendar-cpTodayText,
+	.calendar-cpTodayTextDisabled,
+	.calendar-cpText
+			{
+			font-family:arial;
+			font-size:8pt;
+			}
+	TD.calendar-cpDayColumnHeader
+			{
+			text-align:right;
+			border:solid thin #6677DD;
+			border-width:0 0 1 0;
+			}
+	.calendar-cpCurrentMonthDate,
+	.calendar-cpOtherMonthDate,
+	.calendar-cpCurrentDate
+			{
+			text-align:right;
+			text-decoration:none;
+			}
+	.calendar-cpCurrentMonthDateDisabled,
+	.calendar-cpOtherMonthDateDisabled,
+	.calendar-cpCurrentDateDisabled
+			{
+			color:#D0D0D0;
+			text-align:right;
+			text-decoration:line-through;
+			}
+	.calendar-cpCurrentMonthDate
+			{
+			color:#6677DD;
+			font-weight:bold;
+			}
+	.calendar-cpCurrentDate
+			{
+			color: #FFFFFF;
+			font-weight:bold;
+			}
+	.calendar-cpOtherMonthDate
+			{
+			color:#808080;
+			}
+	TD.calendar-cpCurrentDate
+			{
+			color:#FFFFFF;
+			background-color: #6677DD;
+			border-width:1;
+			border:solid thin #000000;
+			}
+	TD.calendar-cpCurrentDateDisabled
+			{
+			border-width:1;
+			border:solid thin #FFAAAA;
+			}
+	TD.calendar-cpTodayText,
+	TD.calendar-cpTodayTextDisabled
+			{
+			border:solid thin #6677DD;
+			border-width:1 0 0 0;
+			}
+	A.calendar-cpTodayText,
+	SPAN.calendar-cpTodayTextDisabled
+			{
+			height:20px;
+			}
+	A.calendar-cpTodayText
+			{
+			color:#6677DD;
+			font-weight:bold;
+			}
+	SPAN.calendar-cpTodayTextDisabled
+			{
+			color:#D0D0D0;
+			}
+	.calendar-cpBorder
+			{
+			border:solid thin #6677DD;
+			}

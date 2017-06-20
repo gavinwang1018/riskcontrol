@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysRole"
+        table="sys_role"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="roleId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[role_id]"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="roleName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[role_name]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+ <!-- Imported bi-directional one-to-many association to SysUserRole -->
+	<set name="sysUserRoleGroup"
+	     table="sys_user_role"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	>
+		<key>
+			<column name="role_id"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysUserRole"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

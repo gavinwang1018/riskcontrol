@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.Tmcc"
+        table="t_mcc"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="native" />
+        </id>
+        <property
+            name="mccName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="mcc_name"
+            length="100"
+            unique="false"
+        />
+        <property
+            name="mccCode"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="mcc_code"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="bigmccName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="bigmcc_name"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="bigmccCode"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="bigmcc_code"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="midmccName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="midmcc_name"
+            length="100"
+            unique="false"
+        />
+        <property
+            name="midmccCode"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="midmcc_code"
+            length="20"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>

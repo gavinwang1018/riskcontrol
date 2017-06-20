@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysTransmitDetail"
+        table="sys_transmit_detail"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="transmitId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[transmit_id]"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="readFlag"
+            type="java.lang.Boolean"
+            update="true"
+            insert="true"
+            access="property"
+            column="[read_flag]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="advice"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[advice]"
+            length="5000"
+            unique="false"
+        />
+        <property
+            name="transmitTime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="[transmit_time]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="receiver"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[receiver]"
+            length="32"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="transmit_id"
+			name="transmitIdOfSysTransmit"
+			class="cn.com.brilliance.begen.model.SysTransmit"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="receiver"
+			name="receiverOfSysUser"
+			class="cn.com.brilliance.begen.model.SysUser"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

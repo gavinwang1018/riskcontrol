@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysWorkflowDef"
+        table="sys_workflow_def"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="id"
+            column="[id]"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="workflowName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[workflow_name]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="workflowLabel"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[workflow_label]"
+            length="50"
+            unique="false"
+        />
+        <property
+            name="dataObject"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[data_object]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="rollBack"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[roll_back]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="historyLayout"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[history_layout]"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="partyId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[party_id]"
+            length="20"
+            unique="false"
+        />
+ <!-- Imported bi-directional one-to-many association to SysWorkflowState -->
+	<set name="sysWorkflowStateGroup"
+	     table="sys_workflow_state"
+	     lazy="true"
+	     inverse="true"
+	     cascade="delete"
+ 	     sort="unsorted"
+	>
+		<key>
+			<column name="workflow_id"/>
+		</key>
+		<one-to-many
+			class="cn.com.brilliance.begen.model.SysWorkflowState"
+		/>
+	</set>     
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="data_object"
+			name="dataObjectOfSysDataObject"
+			class="cn.com.brilliance.begen.model.SysDataObject"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="history_layout"
+			name="historyLayoutOfSysFormLayout"
+			class="cn.com.brilliance.begen.model.SysFormLayout"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="party_id"
+			name="partyIdOfSysParty"
+			class="cn.com.brilliance.begen.model.SysParty"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

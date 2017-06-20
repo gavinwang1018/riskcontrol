@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.SysTemplate"
+        table="sys_template"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="all"
+    >
+		<id
+            name="templateId"
+            column="[template_id]"
+            type="java.lang.String"
+            length="4"
+        >
+            <generator class="assigned" />
+        </id>
+        <property
+            name="templateName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[template_name]"
+            length="40"
+            unique="false"
+        />
+        <property
+            name="templateDesc"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[template_desc]"
+            length="255"
+            unique="false"
+        />
+        <property
+            name="templateDbName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="[template_db_name]"
+            length="40"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>

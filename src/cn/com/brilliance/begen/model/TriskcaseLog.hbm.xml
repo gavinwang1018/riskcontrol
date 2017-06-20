@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.TriskcaseLog"
+        table="t_riskcase_log"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="uuid.hex" />
+        </id>
+        <property
+            name="userMame"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="user_mame"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="operatorDatetime"
+            type="java.util.Date"
+            update="true"
+            insert="true"
+            access="property"
+            column="operator_datetime"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="ip"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="ip"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="content"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="content"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="loginName"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="login_name"
+            length="20"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>

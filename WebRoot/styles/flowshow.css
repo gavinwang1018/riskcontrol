@@ -1,0 +1,198 @@
+.originbutton{
+	border:outset white 2px;
+	background-color:#ECECE8;
+	width:60px;
+}
+.selectbutton{
+	border:inset 2px white;
+	background-color:#dddddd;
+	width:60px;
+}
+.commandButton{
+	border:outset white 2px;
+	background-color:#ECECE8;
+	width:60px;
+	text-align:center;
+}
+.state_finish{
+	background-image: url("../images/state_finish.jpg"); 
+	background-repeat:no-repeat; 
+	border:0;
+}
+.state_active{
+	background-image: url("../images/state_active.jpg"); 
+	background-repeat:no-repeat; 
+	border:0;
+}
+.state_stop{
+	background-image: url("../images/state_stop.jpg"); 
+	background-repeat:no-repeat; 
+	border:0;
+}
+.state_current{
+	background-image: url("../images/state_current.jpg"); 
+	background-repeat:no-repeat; 
+	border:0;
+}
+.stateBG{
+	background-image: url("../images/state.jpg"); 
+	background-repeat:no-repeat;
+	border:0;
+}
+.eventBG{
+	background-image: url("../images/event.jpg"); 
+	background-repeat:no-repeat;
+	border:0;
+}
+
+.movebutton{
+	background-image: url("../images/select.gif"); 
+	background-color:#ECECE8;
+	border:inset 2px white;
+	background-position:center;
+	width:60px;
+	background-repeat:no-repeat; 
+	height:20px;
+}
+.nmoveButton{
+	background-image: url("../images/select.gif"); 
+	background-color:#ECECE8;
+	border:outset 2px white;
+	background-position:center;
+	width:60px;
+	background-repeat:no-repeat; 
+	height:20px;
+}
+.macrolong{ 
+display:block
+} 
+.macrolong *{ 
+display:block;
+height:1px;
+overflow:hidden;
+background:#FFFF80;
+} 
+.macrolong1{ 
+border-right:1px solid #FFFF80;
+padding-right:1px;
+margin-right:3px;
+border-left:1px solid #FFFF80;
+padding-left:1px;
+margin-left:3px;
+background:#FFFF80;
+} 
+.macrolong2{ 
+border-right:1px solid #FFFF80;
+border-left:1px solid #FFFF80;
+padding:0px 1px;
+background:#FFFF80;
+margin:0px 1px;
+} 
+.macrolong3{ 
+border-right:1px solid #FFFF80;
+border-left:1px solid #FFFF80;
+margin:0px 1px;
+} 
+.macrolong4{ 
+border-right:1px solid #FFFF80;
+border-left:1px solid #FFFF80;
+} 
+.macrolong5{ 
+border-right:1px solid #FFFF80;
+border-left:1px solid #FFFF80;
+} 
+.macrolong_content{ 
+padding:0px 5px;
+background:#FFFF80;
+height:30px;
+width:60px;
+text-align:center;
+vertical-align:middle;
+font-size:14px;
+font-family:arial£»
+}
+.fontStyle{
+text-align:center;
+vertical-align:middle;
+font-size:13px;
+font-family:arial£»
+}
+.mainFoot{
+	text-align:center;
+	text-indent:10px;
+	background-color:#A6BBD0;
+	border-top:1px solid #336699;
+}
+.button {
+	background-color:#FFFFFF;
+    color: #336699;
+    border-left: 1px solid #336699;
+    border-top:1px solid #336699;
+    border-right:1px solid #336699;
+    border-bottom:1px solid #336699;
+    padding:0 2px 0 2px;
+    margin:2px;
+    font-size:12px;
+    cursor:hand;
+}
+.mainTable{
+	margin-bottom:10px;
+	background-color:#EDEDED;
+	width:100%;
+	border:2px solid #336699;
+	padding-top:4px;
+	font-size:12px;
+	vertical-align:top;
+}
+.tdImg{
+	width:17px;
+	vertical-align:top;
+}
+.textFont{
+	width:80px;
+	margin-top:5px;
+	vertical-align:top;
+}
+.textTd{
+	width:80px;
+	vertical-align:top;
+}
+.spanText{
+
+
+}
+.pointImg{
+	width:17px;
+	height:12px; 
+	background-image:url("../images/point2.gif");
+	vertical-align:top;
+	margin-top:4px;
+}
+.headTable {
+	background-color:#F3F3EC;	
+	height:23px;
+	color:#333333;
+	font-size:12px;
+	align:center;
+}
+table.detail{
+	width:100%;
+	font-size:12px;
+}
+.rowsClass2{
+	background-color:#F8F8F8;
+	height:30px;
+	text-align:center;
+}
+
+.rowsClass{
+	background-color:#FFFFFF;
+	height:30px;
+	text-align:center;
+}
+.mainTitle{
+	text-align:left;
+	text-indent:10px;
+	background-color:#A6BBD0;
+	border-bottom:1px solid #336699;
+}

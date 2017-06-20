@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.TruleInstanceGroupSegment"
+        table="t_rule_instance_group_segment"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="native" />
+        </id>
+        <property
+            name="propertion"
+            type="java.lang.Float"
+            update="true"
+            insert="true"
+            access="property"
+            column="propertion"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="ruleInstanceGroupId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="rule_instance_group_id"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="begin"
+            type="java.lang.Float"
+            update="true"
+            insert="true"
+            access="property"
+            column="begin"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="end"
+            type="java.lang.Float"
+            update="true"
+            insert="true"
+            access="property"
+            column="end"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="ruleInstanceId"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="rule_instance_id"
+            length="32"
+            unique="false"
+        />
+        <property
+            name="value"
+            type="java.lang.Float"
+            update="true"
+            insert="true"
+            access="property"
+            column="value"
+            length="250"
+            unique="false"
+        />
+
+<!-- imported bi-directional many-to-one association -->
+		<many-to-one
+			column="rule_instance_group_id"
+			name="ruleInstanceGroupIdOfTruleInstanceGroup"
+			class="cn.com.brilliance.begen.model.TruleInstanceGroup"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+		<many-to-one
+			column="rule_instance_id"
+			name="ruleInstanceIdOfTruleInstance"
+			class="cn.com.brilliance.begen.model.TruleInstance"
+            not-null="false"
+	        update="false"
+	        insert="false"
+			not-found="ignore"
+			lazy="proxy"
+		/>	
+    </class>
+</hibernate-mapping>

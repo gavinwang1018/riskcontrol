@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC
+                            "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                            "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class
+        name="cn.com.brilliance.begen.model.Tcardbin"
+        table="t_cardbin"
+        select-before-update="false"
+        dynamic-update="true"
+        dynamic-insert="true"
+        optimistic-lock="version"
+    >
+		<id
+            name="id"
+            column="id"
+            type="java.lang.String"
+            length="32"
+        >
+            <generator class="native" />
+        </id>
+        <property
+            name="name"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="name"
+            length="20"
+            unique="false"
+        />
+        <property
+            name="length"
+            type="java.lang.Integer"
+            update="true"
+            insert="true"
+            access="property"
+            column="length"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="bin"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="bin"
+            length="14"
+            unique="false"
+        />
+        <property
+            name="cupscard"
+            type="java.lang.Boolean"
+            update="true"
+            insert="true"
+            access="property"
+            column="cupscard"
+            length="250"
+            unique="false"
+        />
+        <property
+            name="bank"
+            type="java.lang.String"
+            update="true"
+            insert="true"
+            access="property"
+            column="bank"
+            length="100"
+            unique="false"
+        />
+     
+
+<!-- imported bi-directional many-to-one association -->
+    </class>
+</hibernate-mapping>
